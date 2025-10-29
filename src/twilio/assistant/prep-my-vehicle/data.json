@@ -1,0 +1,286 @@
+[
+  {
+    "question": "What is Prep My Vehicle?",
+    "answer": "Prep My Vehicle is a cloud-based software designed for car dealerships to streamline the vehicle preparation and reconditioning process."
+  },
+  {
+    "question": "What does Prep My Vehicle help with?",
+    "answer": "Prep My Vehicle manages workflows from vehicle acquisition to final sale by tracking tasks, improving accountability, and speeding up the overall reconditioning process."
+  },
+  {
+    "question": "How does it track vehicle progress?",
+    "answer": "Prep tracks vehicle progress through a real-time dashboard that visually shows each vehicle's status and alerts users to any delays or outstanding tasks."
+  },
+  {
+    "question": "Can you perform vehicle inspections with it?",
+    "answer": "Yes, it offers customizable Vehicle Health Checks (VHCs) using a color-coded system (Green, Amber, Red), including the ability to add notes and photos."
+  },
+  {
+    "question": "Who can use Prep My Vehicle?",
+    "answer": "Internal dealership teams as well as external vendors. Each user type gets a dedicated dashboard to manage tasks efficiently."
+  },
+  {
+    "question": "Does it notify users automatically?",
+    "answer": "Yes, automated notifications are sent when vehicles progress through different workflow stages."
+  },
+  {
+    "question": "Does it reduce costs?",
+    "answer": "Absolutely. By reducing reconditioning time, dealerships can cut down stock-holding costs. For instance, saving 3 days per vehicle on 50 vehicles/month could mean over £2,250 in monthly savings."
+  },
+  {
+    "question": "What's the backend tech structure like?",
+    "answer": "It's fully cloud-based, secure, GDPR-compliant, and accessible on any device."
+  },
+  {
+    "question": "Is it compatible with existing Dealer Management Systems (DMS)?",
+    "answer": "Yes, it integrates with most DMS solutions, enabling automatic syncing of data."
+  },
+  {
+    "question": "Who created Prep My Vehicle?",
+    "answer": "It's built by Appraisee, a Galway-based company specializing in automotive solutions."
+  },
+  {
+    "question": "How can I contact them?",
+    "answer": "Email: info@prepmyvehicle.com, Phone: +353 91 393319, Website: https://prepmyvehicle.com"
+  },
+  {
+    "question": "What does the Home page of Prep My Vehicle highlight?",
+    "answer": "It gives an overview of how the platform helps dealerships manage vehicle prep, reduce delays, boost communication, and ultimately get cars retail-ready faster."
+  },
+  {
+    "question": "What is covered under the Features section?",
+    "answer": "End-to-end workflow tracking, Real-time progress dashboards, Vehicle Health Checks (VHCs), Team and vendor management, Automated notifications, GDPR-compliant cloud storage, Integration with DMS systems."
+  },
+  {
+    "question": "What is the purpose of the Demo page?",
+    "answer": "It allows users to schedule a live demonstration with the Prep My Vehicle team to better understand the product and how it fits into their operations."
+  },
+  {
+    "question": "Is there a Pricing page?",
+    "answer": "Yes, but it doesn't show specific pricing figures. Instead, it encourages interested parties to contact the team for customized quotes based on their needs."
+  },
+  {
+    "question": "What can I find on the Contact page?",
+    "answer": "You can fill out a contact form, find their phone number and email, and optionally schedule a demo or ask product-related questions."
+  },
+  {
+    "question": "Is there an option to book a demo anywhere else?",
+    "answer": "Yes, the 'Book a Demo' button is prominently displayed on the homepage, in the top menu, and at the bottom of most pages."
+  },
+  {
+    "question": "Do I need to install anything to use Prep My Vehicle?",
+    "answer": "No installation is required. It's completely cloud-based, meaning you just need an internet connection and a web browser."
+  },
+  {
+    "question": "Is it mobile-friendly?",
+    "answer": "Yes, Prep My Vehicle is fully mobile responsive. It works on smartphones, tablets, and desktops."
+  },
+  {
+    "question": "How long does it take to get up and running?",
+    "answer": "Most users are up and running the same day they sign up. The onboarding process is fast and guided."
+  },
+  {
+    "question": "Can I customize the system to suit my business needs?",
+    "answer": "Yes, the system is fully customizable. You can tailor workflows, VHC templates, and user roles to match your dealership's processes."
+  },
+  {
+    "question": "How much does it cost?",
+    "answer": "Pricing varies depending on your requirements. The team offers tailored pricing plans, and you can contact them for a personalized quote."
+  },
+  {
+    "question": "Do you provide support?",
+    "answer": "Yes, they offer ongoing support via phone, email, and in-app messaging. The support team is based in Ireland and is highly responsive."
+  },
+  {
+    "question": "Can I add external vendors?",
+    "answer": "Absolutely. Vendors get their own dashboard where they can view assigned vehicles, complete tasks, and communicate with your team."
+  },
+  {
+    "question": "Is my data secure with Prep My Vehicle?",
+    "answer": "Yes, Prep My Vehicle complies with GDPR and uses secure cloud infrastructure to protect your data."
+  },
+  {
+    "question": "Is there role based permission in Prep My Vehicle?",
+    "answer": "Yes, Prep My Vehicle is role based. Different users have different permissions on which they can perform tasks. Different roles are as follows: Dealer, Staff, Offsite Member, Web View."
+  },
+  {
+    "question": "What do the different user types do?",
+    "answer": "Users have different access levels: Dealer Admin can do everything, Staff can operate within assigned swimlanes, Offsite Members (vendors) can add notes and close their swimlanes, and Web View users can only view vehicles without performing any actions."
+  },
+  {
+    "question": "How does it ensure that users can perform certain tasks?",
+    "answer": "It is ensured using the 4 digit pin and authentication key."
+  },
+  {
+    "question": "How is performing a certain task secure in PrepMyVehicle?",
+    "answer": "In PrepMyVehicle, performing a certain task is secured using a 4 digit pin which is unique for all users under a dealership."
+  },
+  {
+    "question": "What is a Vehicle Health Check (VHC) in Prep My Vehicle?",
+    "answer": "A VHC is a multi-point inspection performed on a vehicle to assess its condition. It helps identify issues or upcoming maintenance needs, providing transparency to customers and aiding in decision-making."
+  },
+  {
+    "question": "What does your digital VHC solution offer in Prep My Vehicle?",
+    "answer": "Our platform digitizes the entire VHC process. Key features include: Customizable checklists, Technician input via tablet or mobile, Photo & video uploads of defects, Real-time reporting for service advisors, Integration with CRM and DMS systems."
+  },
+  {
+    "question": "Is your VHC platform mobile-friendly in Prep My Vehicle?",
+    "answer": "Yes! Technicians can use tablets or smartphones to complete checks right at the vehicle, saving time and eliminating paper."
+  },
+  {
+    "question": "Can I include photos or videos in the health check in Prep My Vehicle?",
+    "answer": "Absolutely. Technicians can attach images or videos to each check item, improving trust and transparency with customers."
+  },
+  {
+    "question": "Can the VHC checklists be customized in Prep My Vehicle?",
+    "answer": "Yes, you can tailor checklists to match your dealership's brand, vehicle types, or services offered from 150+ checklist points."
+  },
+  {
+    "question": "What are the types of notifications sent by Prep My Vehicle?",
+    "answer": "We send email notifications to users for various vehicle events such as Start Prep, Workshop, Bodyshop, Wheels, Valet, Advertising, swimlane openings and closings, and Prep Cycle completions (General/Detailed). Users can choose whether or not to receive these notifications."
+  },
+  {
+    "question": "Can we customize headers for Swimlanes in Prep My Vehicle?",
+    "answer": "Yes, you can customize headers for Swimlanes like Workshop, body shop etc to any name you are comfortable with."
+  },
+  {
+    "question": "What are the types of reports available in Prep My Vehicle?",
+    "answer": "Currently we provide 6 types of reports: Average time per station and Average complete cycle. Trade sale average complete cycle time. Current status of all Prep Vehicles. Stats by Make, Model and Variant. What vehicles are currently offsite. Average Vendor(Offsite) time."
+  },
+  {
+    "question": "Is there any categorization for VHC checklist points in Prep My Vehicle?",
+    "answer": "Yes, checklist points are categorized and in the web-app it populates (appears) category wise."
+  },
+  {
+    "question": "Can we add a user to multiple locations in Prep My Vehicle?",
+    "answer": "Yes, you can add a user to multiple locations under the same dealership."
+  },
+  {
+    "question": "Can we switch locations in Prep My Vehicle?",
+    "answer": "Yes, you can switch locations and switch to any location you are authorized to."
+  },
+  {
+    "question": "Can an offsite member be part of multiple dealerships in Prep My Vehicle?",
+    "answer": "Yes, it is an exception that offsite members can be added to multiple dealerships with offsite member roles."
+  },
+  {
+    "question": "How does an offsite member work when assigned to multiple locations under multiple dealerships in Prep My Vehicle?",
+    "answer": "Offsite member's web-app view is different from normal users; they can see listings of vehicles which are assigned to them and can only close the swimlane."
+  },
+  {
+    "question": "Is VHC a default feature in Prep My Vehicle?",
+    "answer": "No, VHC is not a default or complementary feature. You can opt-in or opt-out to this feature as it can be enabled and disabled for dealerships depending upon their requirements."
+  },
+  {
+    "question": "Can we add offsites in Prep My Vehicle?",
+    "answer": "Yes, you can add offsites and that can be multiple. It can be added either under Bodyshop or Wheels."
+  },
+  {
+    "question": "Is Multiple Off site supported in PrepMyVehicle?",
+    "answer": "Yes, PrepMyVehicle supports multiple off site."
+  },
+  {
+    "question": "What is multiple offsite in Prep My Vehicle?",
+    "answer": "Multiple off site means at a single given time multiple offsites can be opened under a swimlane."
+  },
+  {
+    "question": "Is the multiple offsite feature available for all swimlanes in Prep My Vehicle?",
+    "answer": "No, this feature is only available for 2 swimlanes - a.) Body shop and b.) Wheels."
+  },
+  {
+    "question": "Can we edit photos and videos uploaded in vhc while completing vhc checklist in Prep My Vehicle?",
+    "answer": "Yes, you can edit each and every checklist points photo, video and notes."
+  },
+  {
+    "question": "Does VHC show the count of checklist points completed in Prep My Vehicle?",
+    "answer": "Yes, it provided a summary count of how many pending, processing and in completed."
+  },
+  {
+    "question": "From a list of more than large checklist points how can we find out pending points in Prep My Vehicle VHC?",
+    "answer": "Pending points are moved to top or appear on top in their respective categories so that the user doesn't have to scroll much and saves its time and efforts."
+  },
+  {
+    "question": "What are the stats provided on the Prep Dealer dashboard in Prep My Vehicle?",
+    "answer": "On the dashboard you will find stats for total vehicles, vehicles waiting for prep, prep start vehicles, prep completed vehicles, total locations, total users. Graph for vehicles - pending, processing and completed. Averages based on offsites, Averages per station in total vehicles added, processing and processed."
+  },
+  {
+    "question": "What are the types of panels in PrepMyVehicle?",
+    "answer": "There are 2 panels: Dealer Admin and Web-app."
+  },
+  {
+    "question": "Is there a mobile app also for Prep My Vehicle?",
+    "answer": "Yes, Prep has an iPAD app for iOS devices."
+  },
+  {
+    "question": "How can we add vehicles to the PrepMyVehicle system?",
+    "answer": "There are multiple ways you can add your vehicle stock to PrepMyVehicle system which are as follows: By email csv, by third party api, by SFTP file upload, by logging into the dealer panel."
+  },
+  {
+    "question": "Does PrepMyVehicle support Key loop?",
+    "answer": "Yes key loop is supported and when supported you have to pass stock list number when uploading vehicle stock to Prep system."
+  },
+  {
+    "question": "From which dates the average gets calculated in Prep My Vehicle?",
+    "answer": "There is a feature Is Prep start, if the prep start option is on then it is calculated using prep start date else from the date when vehicle is added to the system."
+  },
+  {
+    "question": "Does PrepMyVehicle Web-app supports searching, filtering and sorting?",
+    "answer": "Yes, web-app supports searching, filtering and sorting."
+  },
+  {
+    "question": "What is the response time for a support query for Prep My Vehicle?",
+    "answer": "Other than holidays and weekends, it usually takes the same day to reply and resolve the queries and if not resolved it is escalated to the technical team."
+  },
+  {
+    "question": "Can we prioritise sold out vehicles in Prep in Prep My Vehicle?",
+    "answer": "Yes, you can prioritize sold out vehicles in Prep by marking that vehicle as sold and after that it will appear on top vehicles so that it gets processed on priority."
+  },
+  {
+    "question": "Can we see from how many days the vehicle is in the workshop in Prep My Vehicle?",
+    "answer": "Yes, we show the count of days from which vehicles are in the workshop."
+  },
+  {
+    "question": "Can we work dealership wise and location wise both in Prep My Vehicle?",
+    "answer": "No, vehicles will appear to you on a location basis and if you want to process vehicles in another location you just have to switch to that location to process vehicles in that location."
+  },
+  {
+    "question": "Can we edit notes once submitted in Prep My Vehicle?",
+    "answer": "Yes, you can edit/update notes after they are being submitted."
+  },
+  {
+    "question": "Can we see swimlane work history, what has been done in the past in Prep My Vehicle?",
+    "answer": "Yes, you can see what work has been done in the past or ongoing on a particular vehicle."
+  },
+  {
+    "question": "What happens once a vehicle is processed in Prep My Vehicle?",
+    "answer": "Once a vehicle is processed it is considered as Completed or Archived. To see that vehicle in Web-app you need to search for that vehicle using vehicle registration number."
+  },
+  {
+    "question": "Is there any other way by which you can mark a vehicle as an archive in Prep My Vehicle?",
+    "answer": "Yes, from the dealer dashboard under vehicles section there is a vehicle listing from there you can mark that vehicle or mark bulk vehicles into archive using the multi checkbox select option."
+  },
+  {
+    "question": "Can we see notes count in summary in Prep My Vehicle?",
+    "answer": "Yes, you can see notes count in vehicles listing."
+  },
+  {
+    "question": "Can we see vehicle details and other stuff in the Dealer panel in Prep My Vehicle?",
+    "answer": "Yes,a complete overview of vehicles is available on the dealer panel for a vehicle and reports section is also available where you can find out averages and other details depending upon your requirement."
+  },
+  {
+    "question": "Can we add notes in vehicle health check form in Prep My Vehicle?",
+    "answer": "Yes, there are two types of notes that you can add or edit while working on a vehicle health check list one is General Comment or notes and other is specific to check list point."
+  },
+  {
+    "question": "What is a special feature in terms of vehicle health check form in Prep My Vehicle?",
+    "answer": "Checklist points which are in red will appear in bodyshop and wheels while creating an offsite swimlane in Bodyshop or Wheels and there you can directly select that red check list point so that it can be fixed and further after fix you can move that point to green."
+  },
+  {
+    "question": "Is understanding or onboarding easy when it comes to Prep My Vehicle web-app?",
+    "answer": "Yes, it is pretty easy to understand how it works when it comes to web app and the main reason behind this is simplified UI/UX. Where everything is detailed to attention. Even after this any queries left out our team is always available to help you."
+  },
+  {
+    "question": "Is there no onsite onboarding process for Prep My Vehicle?",
+    "answer": "Yes, we provide on-site onboarding also depending upon time slot and feasibility otherwise we do so using trusted streaming platforms."
+  }
+]

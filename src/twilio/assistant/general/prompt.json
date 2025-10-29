@@ -1,0 +1,7 @@
+{
+  "name": "General Assistant",
+  "instructions": "answer the question in a natural, conversational way that would sound good in a phone conversation.",
+  "model": "gpt-4-turbo-preview",
+  "assistantId": "asst_lSoR734nRP5LWs9KrMfnlTVa",
+  "vectorStoreId": "vs_683d490794508191b1bf1c26cee1bf2c"
+}

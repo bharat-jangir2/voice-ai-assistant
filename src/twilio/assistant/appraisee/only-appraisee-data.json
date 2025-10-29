@@ -1,0 +1,926 @@
+[
+  {
+    "question": "What is Appraisee?",
+    "answer": "Appraisee is a cloud-based SaaS platform for vehicle trade-ins and appraisals, helping dealerships digitize and manage valuations, customer self-appraisals, trader bids, and reconditioning in one place."
+  },
+  {
+    "question": "Tell me more about Appraisee?",
+    "answer": "Appraisee is a cloud-based platform for dealerships in Ireland and the UK that manages trade-ins, appraisals, customer self-appraisals, trader bids, and reconditioning in one place. Founded in 2016 by Colm Murphy, it integrates with services like Cartell, Motorcheck, and AutoTrader, is fully GDPR-compliant, and works on web and mobile with a 30-day free trial."
+  },
+  {
+    "question": "What does Appraisee do?",
+    "answer": "Appraisee stores and manages all vehicle trade-in and appraisal data in one platform, helping dealerships capture details, value vehicles accurately, and streamline customer and trader interactions."
+  },
+  {
+    "question": "Why was Appraisee created?",
+    "answer": "Appraisee was created to streamline and digitize vehicle trade-in workflows, reducing errors and speeding up the appraisal process for dealerships."
+  },
+  {
+    "question": "How does Appraisee work?",
+    "answer": "Dealership staff capture vehicle details in the app, managers review and value the trade-in, and customers can submit self-appraisals online, with all information stored in one platform for follow-up or trader bidding."
+  },
+  {
+    "question": "Who uses Appraisee?",
+    "answer": "Dealership staff and customers doing trade-ins.Appraisee is used by dealership staff such as salespeople, managers, and supervisors, as well as customers completing trade-ins or self-appraisals."
+  },
+  {
+    "question": "What problem does appraisee solve?",
+    "answer": "Appraisee replaces fragmented trade-in workflows with a single digital platform, reducing errors, saving time, and improving accuracy in vehicle valuations."
+  },
+  {
+    "question": "What is the vision behind appraisee?",
+    "answer": "The vision behind Appraisee is to digitally transform vehicle trade-in workflows by making them transparent, efficient, and easy for both dealerships and customers."
+  },
+  {
+    "question": "Is appraisee a product, a platform, or a service?",
+    "answer": "Appraisee is a cloud-based software platform delivered as a SaaS service with multiple integrated tools for vehicle appraisals and trade-ins."
+  },
+  {
+    "question": "Is appraisee available for public use?",
+    "answer": "Yes, dealerships can sign up for a fully featured 30-day free trial and start using Appraisee publicly."
+  },
+  {
+    "question": "What makes appraisee unique?",
+    "answer": "Appraisee is unique because it offers a complete end-to-end system that combines in-showroom appraisals, customer self-appraisals, and live trader bidding in one platform."
+  },
+  {
+    "question": "What is ANPR?",
+    "answer": "ANPR stands for Automatic Number Plate Recognition, a system that scans vehicle number plates using a camera or photo to instantly fetch vehicle details."
+  },
+  {
+    "question": "What is the use of ANPR?",
+    "answer": "ANPR is used to automatically scan and identify a vehicle’s number plate, making it faster to fetch details like make, model, and specifications during an appraisal."
+  },
+  {
+    "question": "What are the main features of appraisee?",
+    "answer": "Appraisee’s main features include ANPR for quick vehicle lookup, damage capture with photos, accurate valuations, finance and spec checks, reconditioning estimates, and integrated chat for team communication."
+  },
+  {
+    "question": "How do I get started with appraisee?",
+    "answer": "Visit appraisee.ie, request a free 30-day trial, and sign up to access the web platform and mobile app with full onboarding support."
+  },
+  {
+    "question": "Can I use appraisee on mobile?",
+    "answer": "Yes, Appraisee is available on iOS and Android, supporting full mobile workflows including ANPR and vehicle appraisals."
+  },
+  {
+    "question": "Does appraisee have an API?",
+    "answer": "Appraisee does not offer a direct public API, but it supports integrations with third-party valuation and finance systems."
+  },
+  {
+    "question": "Is appraisee compatible with other tools or platforms?",
+    "answer": "Yes, Appraisee integrates with vehicle valuation, finance, and history check services like Cartell, Motorcheck, and AutoTrader."
+  },
+  {
+    "question": "Can I integrate appraisee with Slack / Gmail / etc.?",
+    "answer": "No, Appraisee does not support integration with Slack, Gmail, or similar platforms."
+  },
+  {
+    "question": "What are the core modules in appraisee?",
+    "answer": "The core modules in Appraisee are In-Dealership Appraisal, Price My Car, Trader Bid Platform, Sell My Car, Prep My Vehicle, and ANPR."
+  },
+  {
+    "question": "How often is appraisee updated?",
+    "answer": "The iOS app was updated to version 6.3.1 in May 2025, and we regularly publish blog content with updates and new features."
+  },
+  {
+    "question": "Can appraisee be customized?",
+    "answer": "Yes, dealerships can tailor modules like buying criteria and pricing settings, plus get custom reporting dashboards to fit their specific needs."
+  },
+  {
+    "question": "Does appraisee support multi-language or localization?",
+    "answer": "Yes, the mobile app supports many languages including English, French, Spanish, Chinese, and Arabic for international users."
+  },
+  {
+    "question": "Who is the target audience for appraisee?",
+    "answer": "Vehicle dealerships, group operators, and their staff involved in part-exchange and appraisal operations across Ireland and the UK."
+  },
+  {
+    "question": "Do I need to sign up to use appraisee?",
+    "answer": "Yes, dealerships must request access and sign up for either a trial or paid plan, then log in via web or mobile app to start using the platform."
+  },
+  {
+    "question": "Is there a free version of appraisee?",
+    "answer": "Yes, there's a fully featured 30-day free trial available, and the base mobile app is free to download for registered clients."
+  },
+  {
+    "question": "How do I create an account on appraisee?",
+    "answer": "Fill out your contact details on the website under Free Trial or Contact us, then the Appraisee team will set up your access and guide you through the onboarding process."
+  },
+  {
+    "question": "How do I reset my appraisee password?",
+    "answer": "On the login page there's a Forgot my password link that will let you initiate the password reset process."
+  },
+  {
+    "question": "How can I delete my appraisee account?",
+    "answer": "Account cancellation requires contacting support via email at info@appraisee.ie or phone, as there's no direct user-initiated deletion option in the system."
+  },
+  {
+    "question": "How do I update my profile on appraisee?",
+    "answer": "Profile details can be updated via the web or mobile app's account settings section after logging in to your account."
+  },
+  {
+    "question": "Can I invite team members to appraisee?",
+    "answer": "Yes, administrators can invite salespeople, managers, supervisors, and other staff members to use the platform with different permission levels."
+  },
+  {
+    "question": "Who owns appraisee?",
+    "answer": "Appraisee is developed by Smooglei Ltd., founded by Colm Murphy who serves as CEO of the company."
+  },
+  {
+    "question": "When was appraisee founded?",
+    "answer": "Appraisee was founded in 2016 by Colm Murphy."
+  },
+  {
+    "question": "Where is the appraisee company located?",
+    "answer": "HAppraisee is headquartered in Galway, Ireland with a UK office in London, EC1V."
+  },
+  {
+    "question": "Is appraisee a startup?",
+    "answer": "Yes, it's a self-owned tech startup with around 2 to 10 employees that was founded in 2016."
+  },
+  {
+    "question": "Can Appraisee identify duplicate or previously appraised vehicles from PMC or app submissions?",
+    "answer": "Yes, Appraisee alerts you to duplicates and displays any previously appraised vehicles in the system."
+  },
+  {
+    "question": "Who are the founders of appraisee?",
+    "answer": "Colm Murphy is the CEO and Founder of Appraisee."
+  },
+  {
+    "question": "How can I invest in appraisee?",
+    "answer": "As a private company, investment opportunities come during fundraising rounds, so you'd need to contact the company directly to discuss any potential investment opportunities."
+  },
+  {
+    "question": "Is appraisee a public company?",
+    "answer": "No, Appraisee is a private, self-owned company and not publicly traded."
+  },
+  {
+    "question": "What is the support email for appraisee?",
+    "answer": "The support email for Appraisee is info@appraisee.ie"
+  },
+  {
+    "question": "What is the helpline number for appraisee?",
+    "answer": "The helpline numbers are +353 91 393 319 for Ireland and +44 207 164 6918 for the UK."
+  },
+  {
+    "question": "How can I contact appraisee?",
+    "answer": "You can contact Appraisee via email at info@appraisee.ie, phone using the helpline numbers, or through the contact form on their website."
+  },
+  {
+    "question": "Does appraisee have a live chat option?",
+    "answer": "We don't offer live chat on the website, but appraisal workflows include built-in chat for internal communication between team members."
+  },
+  {
+    "question": "What are the customer service hours for appraisee?",
+    "answer": "You can contact the Appraisee team during office hours from 9am to 5pm on weekdays, excluding public holidays."
+  },
+  {
+    "question": "Where can I submit a support ticket for appraisee?",
+    "answer": "You can contact via email or phone, or raise issues through the app's support section for any technical problems or feature requests."
+  },
+  {
+    "question": "Does appraisee have a knowledge base or FAQ?",
+    "answer": "Yes, the Appraisee website includes an FAQ section with commonly asked questions and helpful information."
+  },
+  {
+    "question": "How do I report a bug in appraisee?",
+    "answer": "Submit bug reports via email, support contact, or use the app's Support section for bug reports and feature requests."
+  },
+  {
+    "question": "Is appraisee free?",
+    "answer": "No, there's a free 30-day trial period, but after that a subscription is required to continue using the platform."
+  },
+  {
+    "question": "What are the pricing plans for appraisee?",
+    "answer": "Pricing is not published and is based on your specific requirements and usage patterns. You must contact the sales team for personalized pricing details."
+  },
+  {
+    "question": "Is there a trial version of appraisee?",
+    "answer": "Yes, a fully featured 30-day free trial is available to test all platform capabilities before subscribing."
+  },
+  {
+    "question": "Can I cancel my subscription to appraisee?",
+    "answer": "Yes, subscription cancellation is done by contacting support or sales directly via email or phone."
+  },
+  {
+    "question": "Does appraisee offer student or nonprofit discounts?",
+    "answer": "You can contact the Appraisee team at info@appraisee.ie to inquire about any available discounts for students or nonprofit organizations."
+  },
+  {
+    "question": "What payment methods does appraisee accept?",
+    "answer": "Appraisee supports online and offline payment methods, with online payments requiring card details for processing."
+  },
+  {
+    "question": "Is appraisee secure?",
+    "answer": "Yes, it's a cloud-based platform with audit trails that uses secure data handling and storage practices to protect your information."
+  },
+  {
+    "question": "How does appraisee store my data?",
+    "answer": "Data is stored securely in the cloud with full encryption, accessible via dashboard and app, with complete audit trails for all activities."
+  },
+  {
+    "question": "Is appraisee GDPR compliant?",
+    "answer": "Yes, Appraisee is fully GDPR-compliant and the website includes a comprehensive privacy policy outlining data protection practices."
+  },
+  {
+    "question": "Can I export my data from appraisee?",
+    "answer": "Custom reports can be generated and data export is available via the dashboard, but for specific export requirements please contact support for details."
+  },
+  {
+    "question": "What is appraisee's privacy policy?",
+    "answer": "The privacy policy is available on the Appraisee website under the Privacy Policy link with full details on data handling."
+  },
+  {
+    "question": "What happens to my data if I cancel appraisee?",
+    "answer": "Your data stays safe, secure, and encrypted even after cancellation, maintaining the same protection standards."
+  },
+  {
+    "question": "Is appraisee cloud-based or on-premises?",
+    "answer": "It's a cloud-based SaaS platform."
+  },
+  {
+    "question": "What are the system requirements for appraisee?",
+    "answer": "Web access via modern browsers plus iOS 12+ or iPadOS 12+ for mobile app; Android support also available."
+  },
+  {
+    "question": "Does appraisee offer an SDK?",
+    "answer": "No SDK, as the app is available on App Store and Play Store for registered users."
+  },
+  {
+    "question": "Can appraisee be self-hosted?",
+    "answer": "No, it is a fully managed cloud platform."
+  },
+  {
+    "question": "How do I integrate appraisee with my website?",
+    "answer": "Dealerships can embed Price My Car links; deeper integrations require contacting the team."
+  },
+  {
+    "question": "How many types of price my car links available?",
+    "answer": "Price My Car links include single page, multi-page, personal, dealership, and detailed PMC links."
+  },
+  {
+    "question": "How many types of pmc links available?",
+    "answer": "Price My Car links include single page, multi-page, personal, dealership, and detailed PMC links."
+  },
+  {
+    "question": "Why there are so many types of price my car / pmc links available?",
+    "answer": "Different types of PMC links serve different purposes and use cases."
+  },
+  {
+    "question": "What is the use of Detailed PMC Link?",
+    "answer": "Detailed PMC Link is used for detailed vehicle details recording during the appraisal process."
+  },
+  {
+    "question": "What is the use of multi-page pmc link?",
+    "answer": "It's a two-page PMC form which includes vehicle information and 6 images to be filled out."
+  },
+  {
+    "question": "what is the use of personalized pmc link?",
+    "answer": "Personalized PMC Link is a single page form where all details can be filled out using one page."
+  },
+  {
+    "question": "Does appraisee support webhooks?",
+    "answer": "Yes, webhooks are supported as part of custom integrations."
+  },
+  {
+    "question": "Is appraisee reliable for enterprise use?",
+    "answer": "Yes, it's used by large dealer groups across Ireland and UK with audit trails and analytics."
+  },
+  {
+    "question": "What is the uptime of appraisee?",
+    "answer": "Appraisee maintains an uptime of over 99.9% on secure cloud-based infrastructure."
+  },
+  {
+    "question": "How is performance monitored on appraisee?",
+    "answer": "Through dashboards, metrics, and audit logs."
+  },
+  {
+    "question": "Does appraisee provide documentation?",
+    "answer": "Yes, documentation, FAQs, and blog content are available on the website."
+  },
+  {
+    "question": "Are there tutorials for using appraisee?",
+    "answer": "Appraisee offers onboarding support, resources, and blog guides for users."
+  },
+  {
+    "question": "Does appraisee offer onboarding support?",
+    "answer": "Yes, trial setup includes onboarding support, custom reporting, and training."
+  },
+  {
+    "question": "Are there demos available for appraisee?",
+    "answer": "Yes, free trials and demos can be arranged."
+  },
+  {
+    "question": "Is there a YouTube channel or blog for appraisee?",
+    "answer": "We have a blog on our site."
+  },
+  {
+    "question": "Who are the typical users of appraisee?",
+    "answer": "Supervisors, salespeople, sales managers, and admins in car dealerships, especially part-exchange teams."
+  },
+  {
+    "question": "What industries use appraisee?",
+    "answer": "Automotive retail - vehicle dealerships managing part-exchanges and pre-owned inventory."
+  },
+  {
+    "question": "Can appraisee be used in education?",
+    "answer": "No, it is not designed for education purposes."
+  },
+  {
+    "question": "Can appraisee help with employee evaluations?",
+    "answer": "Performance metrics and audit trails provide data to assess staff efficiency."
+  },
+  {
+    "question": "Is appraisee used for performance management?",
+    "answer": "Provides performance analytics per salesperson, useful for monitoring and training."
+  },
+  {
+    "question": "In which countries is appraisee available?",
+    "answer": "It is used in Ireland and UK (United Kingdom)."
+  },
+  {
+    "question": "Is appraisee available in India / US / UK / etc.?",
+    "answer": "It is available in Ireland and UK (United Kingdom)."
+  },
+  {
+    "question": "Can appraisee be used in offline mode?",
+    "answer": "No, it is primarily designed for online use."
+  },
+  {
+    "question": "What are the terms of service for appraisee?",
+    "answer": "It's the 'Terms of Use' link on the website."
+  },
+  {
+    "question": "Where can I find the End User License Agreement (EULA) for appraisee?",
+    "answer": "It is included under the 'Terms of Use' section on the website."
+  },
+  {
+    "question": "What's next for appraisee?",
+    "answer": "Feature enhancements, new integration tools, and expanded analytics."
+  },
+  {
+    "question": "What are the upcoming features in appraisee?",
+    "answer": "You can check the blog and product news where we announce roadmap changes."
+  },
+  {
+    "question": "Does appraisee have a public roadmap?",
+    "answer": "Future plans are shared via the blog, product news, and customer communications."
+  },
+  {
+    "question": "Is Appraisee easy to use?",
+    "answer": "Yes, it's intuitive and replaces manual steps with a central platform for teams."
+  },
+  {
+    "question": "Can Appraisee help reduce exposure to GDPR issues?",
+    "answer": "Yes, data is securely stored and bidding is tracked to support GDPR compliance."
+  },
+  {
+    "question": "What is the 'Price My Car' feature?",
+    "answer": "A self-appraisal tool where customers can submit vehicle details through a personalized link."
+  },
+  {
+    "question": "How does Appraisee impact dealership operations?",
+    "answer": "It boosts profits by improving valuations and reducing cost discrepancies."
+  },
+  {
+    "question": "What makes Appraisee different from other appraisal tools?",
+    "answer": "It fully integrates online and showroom appraisals with live tracking and bidding."
+  },
+  {
+    "question": "Can Appraisee integrate with my dealership's website?",
+    "answer": "Yes, through a customizable 'Price My Car' widget."
+  },
+  {
+    "question": "Does Appraisee support remote appraisals?",
+    "answer": "Yes, customers can complete appraisals from anywhere via link or widget."
+  },
+  {
+    "question": "How does trader bidding work?",
+    "answer": "Dealers send vehicle details to traders, who bid via secure links with all bids tracked."
+  },
+  {
+    "question": "Is Appraisee mobile-friendly?",
+    "answer": "Yes, it works on smartphones, tablets, and iPads."
+  },
+  {
+    "question": "Can Appraisee reduce reconditioning cost disputes?",
+    "answer": "Yes, by recording detailed condition with images at appraisal."
+  },
+  {
+    "question": "How does Appraisee check MOT, tax, and spec?",
+    "answer": "It uses VRM lookup service to fetch MOT, tax, and vehicle details automatically."
+  },
+  {
+    "question": "What are the third party vrm lookup services used?",
+    "answer": "Appraisee uses Cartell, Motorcheck, Motorspecs, Autotrader, and others."
+  },
+  {
+    "question": "Who can use Appraisee?",
+    "answer": "Dealers, sales teams, valuation managers, and multi-location groups."
+  },
+  {
+    "question": "Is Appraisee data secure?",
+    "answer": "Yes, it's encrypted, GDPR-compliant, and access-controlled."
+  },
+  {
+    "question": "Can Appraisee be used across locations?",
+    "answer": "Yes, it supports multi-site management."
+  },
+  {
+    "question": "Does Appraisee provide analytics?",
+    "answer": "Yes, with insights on volumes, bids, conversions, and more."
+  },
+  {
+    "question": "Can I manage online and showroom appraisals in one place?",
+    "answer": "Yes, all appraisals are centralized in one dashboard."
+  },
+  {
+    "question": "Can I upload photos directly from my phone?",
+    "answer": "Yes, vehicle photos and notes can be added via mobile."
+  },
+  {
+    "question": "What if I'm unsure about a vehicle's value?",
+    "answer": "Send it to underwriters for real-time bids via Appraisee."
+  },
+  {
+    "question": "Does Appraisee reduce paperwork?",
+    "answer": "Yes, everything is digital and structured."
+  },
+  {
+    "question": "Can customers appraise from home?",
+    "answer": "Yes, via a dealership link or site widget."
+  },
+  {
+    "question": "What happens after a customer submits details?",
+    "answer": "Dealership reviews it and follows up with a tailored offer."
+  },
+  {
+    "question": "How does appraisee helps to provide best offer/deal for a vehicle?",
+    "answer": "Dealership has a built-in trader feature where they send appraisal to traders who return offers for the vehicle."
+  },
+  {
+    "question": "Is customer data safe?",
+    "answer": "Yes, Appraisee is GDPR-compliant and securely stores data."
+  },
+  {
+    "question": "Can it integrate with my CRM or DMS?",
+    "answer": "Yes, via APIs and custom workflows."
+  },
+  {
+    "question": "Is there an API for developers?",
+    "answer": "Yes, API access is available for integrations."
+  },
+  {
+    "question": "Can I customize the appraisal widget?",
+    "answer": "Yes, including logo, colors, and text."
+  },
+  {
+    "question": "Is training provided?",
+    "answer": "Yes, onboarding and live training are included."
+  },
+  {
+    "question": "How fast can I start?",
+    "answer": "Setup takes only a few hours with full support."
+  },
+  {
+    "question": "Do users need tech skills?",
+    "answer": "No, it's user-friendly and guided."
+  },
+  {
+    "question": "Can I track who did an appraisal and when?",
+    "answer": "Yes, all activity is timestamped and user-tagged."
+  },
+  {
+    "question": "What if a customer sends incomplete info?",
+    "answer": "Your team can follow up to complete it."
+  },
+  {
+    "question": "Can I reassign or escalate appraisals?",
+    "answer": "Yes, they can be reassigned and marked with status."
+  },
+  {
+    "question": "Are there role-based permissions?",
+    "answer": "Yes, for different user types like sales or managers."
+  },
+  {
+    "question": "Can we customize user permissions?",
+    "answer": "Yes, you can customize user permissions using role-based permissions."
+  },
+  {
+    "question": "What kind of subscription does Appraisee offer?",
+    "answer": "Monthly, with manual or auto-payment options."
+  },
+  {
+    "question": "How can appraisals be submitted?",
+    "answer": "Via Appraisee app, PMC app, widget, or dealership site."
+  },
+  {
+    "question": "Is pricing flexible?",
+    "answer": "Yes, based on features, users, and locations."
+  },
+  {
+    "question": "Is there demo support?",
+    "answer": "Yes, demos and training are provided."
+  },
+  {
+    "question": "Is post-training support available?",
+    "answer": "Yes, via support team during weekdays."
+  },
+  {
+    "question": "Can I request feature customizations?",
+    "answer": "Yes, depending on requirements."
+  },
+  {
+    "question": "Where is Appraisee available?",
+    "answer": "Currently in Ireland and UK."
+  },
+  {
+    "question": "What roles exist in the system?",
+    "answer": "Garage Admin, Supervisor, Sales Manager, and Salesperson."
+  },
+  {
+    "question": "What is 'Sell My Car'?",
+    "answer": "A page for users to sell vehicles quickly and transparently to get the best deal."
+  },
+  {
+    "question": "What is the benefit of 'Sell My Car'?",
+    "answer": "Wider trader exposure for better trade-in offers."
+  },
+  {
+    "question": "Does appraisee offer real-time chat?",
+    "answer": "Yes, for internal and customer communication."
+  },
+  {
+    "question": "Are push notifications supported?",
+    "answer": "Yes, for important updates and appraisal activity."
+  },
+  {
+    "question": "Can users report issues?",
+    "answer": "Yes, via an in-app bug report feature."
+  },
+  {
+    "question": "How does Appraisee contact users?",
+    "answer": "Through email, push notifications, or calls."
+  },
+  {
+    "question": "Does it support reconditioning analysis?",
+    "answer": "Yes, by comparing data."
+  },
+  {
+    "question": "Is Appraisee secure?",
+    "answer": "Yes, it's encrypted, cloud-based, and monitored 24/7."
+  },
+  {
+    "question": "Does it support CRM and DMS integration?",
+    "answer": "Yes, through API."
+  },
+  {
+    "question": "Can I track appraisal status?",
+    "answer": "Yes, with real-time status tracking."
+  },
+  {
+    "question": "Is there a digital audit trail?",
+    "answer": "Yes, with full interaction history."
+  },
+  {
+    "question": "Can I export reports?",
+    "answer": "Yes, in CSV or XLS formats."
+  },
+  {
+    "question": "Can users be grouped by branch?",
+    "answer": "Yes, by users and locations."
+  },
+  {
+    "question": "Can I control user permissions?",
+    "answer": "Yes, with role-based access."
+  },
+  {
+    "question": "How fast is appraisal entry?",
+    "answer": "Usually under 3 minutes."
+  },
+  {
+    "question": "Does it support image annotations?",
+    "answer": "Yes, for marking damage or focus areas."
+  },
+  {
+    "question": "Does it show duplicate appraisals?",
+    "answer": "Yes, alerts appear for duplicate registration numbers."
+  },
+  {
+    "question": "What if a user leaves the company?",
+    "answer": "Their account can be disabled."
+  },
+  {
+    "question": "Can I deactivate users?",
+    "answer": "Yes, without losing data."
+  },
+  {
+    "question": "Who uses Appraisee?",
+    "answer": "Dealership staff and customers doing trade-ins."
+  },
+  {
+    "question": "What platforms are supported?",
+    "answer": "Web, iOS, and Android."
+  },
+  {
+    "question": "Does it support self-appraisals?",
+    "answer": "Yes, via link or widget."
+  },
+  {
+    "question": "Does it fetch MOT, Tax, and spec?",
+    "answer": "Yes, via third-party lookup services like Cartell, Motorcheck, Motorspecs, AutoTrader, and Simi."
+  },
+  {
+    "question": "Which are the third party services appraisee is integrated with?",
+    "answer": "Appraisee is integrated with Cartell, Motorcheck, Motorspecs, Autotrader, Simi, RapidRTC, CarsNow, Eskimo, and Keyloop."
+  },
+  {
+    "question": "What are the third party services appraisee uses for lookup and valuation?",
+    "answer": "Appraisee is integrated with Cartell, Motorcheck, Motorspecs, Autotrader, Simi, and others."
+  },
+  {
+    "question": "What is ANPR?",
+    "answer": "A camera-based system to detect number plates and fetch vehicle info."
+  },
+  {
+    "question": "Is Appraisee integrated with Auto Trader?",
+    "answer": "Yes, the UK version is integrated with it."
+  },
+  {
+    "question": "Is reconditioning tracked?",
+    "answer": "Yes, via Prep My Vehicle system."
+  },
+  {
+    "question": "How to get a free trial?",
+    "answer": "Submit a request via website or contact the team."
+  },
+  {
+    "question": "Does the app have contact info?",
+    "answer": "Yes, in the sidebar of IE and UK versions."
+  },
+  {
+    "question": "What details are needed for an appraisal?",
+    "answer": "Vehicle info, trade-in details, damage assessment, and photos."
+  },
+  {
+    "question": "What vehicle types can be appraised?",
+    "answer": "New or used vehicles."
+  },
+  {
+    "question": "What features are included?",
+    "answer": "Trade-ins, self-appraisals, auctions, reports, and reconditioning tools."
+  },
+  {
+    "question": "What benefits does Appraisee offer?",
+    "answer": "Better sales, less paperwork, analytics, secure data, training, and support."
+  },
+  {
+    "question": "How does onboarding work?",
+    "answer": "Call or submit a form, get credentials and training, then start appraising."
+  },
+  {
+    "question": "How can I contact support besides phone?",
+    "answer": "You'll get an Account Manager for direct support."
+  },
+  {
+    "question": "Are Account Managers available in the UK?",
+    "answer": "Yes, both IE and UK have dedicated managers."
+  },
+  {
+    "question": "Can we integrate PMC on our website?",
+    "answer": "Yes, PMC can be integrated using widget code that appraisee provides."
+  },
+  {
+    "question": "Can we integrate PMC on our dealership website?",
+    "answer": "Yes, PMC can be integrated using widget code that appraisee provides."
+  },
+  {
+    "question": "What are the main brands that you can find on appraisee?",
+    "answer": "You can find all vehicle brands available in Ireland and UK like Audi, BMW, Citroen, Volvo, Hyundai, Jaguar, and others."
+  },
+  {
+    "question": "Is PMC link unique in a dealership?",
+    "answer": "For dealership, location, and user there will be a unique link to each one with routing depending on the link."
+  },
+  {
+    "question": "Is Integrating PMC on a website fast?",
+    "answer": "Yes, integrating PMC on a website is fast and just requires widget code that we offer to dealerships."
+  },
+  {
+    "question": "Can we see all pmc appraisals and app appraisals in a same place?",
+    "answer": "Yes, you can see all appraisals in the same place with complete details available for each appraisal."
+  },
+  {
+    "question": "How to identify which appraisals are created from PMC and app?",
+    "answer": "Each type of appraisal has a color code border which helps identify the source."
+  },
+  {
+    "question": "Do appraisee track partial pmc leads?",
+    "answer": "Yes, dealerships can track these leads in the PMC Leads section from the dealer panel."
+  },
+  {
+    "question": "What are the details vrm lookup provides?",
+    "answer": "VRM lookup provides vehicle details like make, model, description, color, engine details, NCT expiry, tax expiry, and CO2."
+  },
+  {
+    "question": "What happens once deal is completed / done?",
+    "answer": "Appraisal status is changed to Done and moved to Archived."
+  },
+  {
+    "question": "Can we access archived appraisal?",
+    "answer": "Yes, you can access archived appraisals using web and mobile applications."
+  },
+  {
+    "question": "Can we assign staff to multiple locations?",
+    "answer": "Yes, you can assign staff to multiple locations and they can perform tasks in assigned locations."
+  },
+  {
+    "question": "What are the types of fees appraisee charge for?",
+    "answer": "Appraisee charges for number of users, locations, PMC leads, trader text messages sent, and primary fees."
+  },
+  {
+    "question": "Where can we see missed notifications?",
+    "answer": "You can see missed notifications from the notifications section in app and web."
+  },
+  {
+    "question": "Can we call directly to customer of trade deals or any other information?",
+    "answer": "There is a call-to-action button next to each appraisal that initiates a call to the customer."
+  },
+  {
+    "question": "What are the important details that are stored during an appraisal?",
+    "answer": "Appraisee stores finance, trade-in, vehicle required, vehicle damage details, and photos."
+  },
+  {
+    "question": "What are the types of roles in appraisee?",
+    "answer": "Appraisee has 4 types of users: Garage Admin, Supervisor, Sales Manager, and Sales Person role."
+  },
+  {
+    "question": "Do we get performance report of our dealership?",
+    "answer": "Yes, we send dealership weekly reports with account summary every Monday, plus you can export reports from the dealer panel."
+  },
+  {
+    "question": "What will be the process of setting my dealership in appraisee ?",
+    "answer": "Onboarding is quick and simple. Reach out via call, email, or trial form. We'll schedule a meeting, explain everything, set up your trial account, provide training, and add traders. Once ready, we'll set up payment as per your preference."
+  },
+  {
+    "question": "What benefits appraisee offers ?",
+    "answer": "We offer improved sales, reduced paperwork, reports, analytics, secure data, quick support, training, and complete assistance during onboarding."
+  },
+  {
+    "question": "What features appraisee offers ?",
+    "answer": "Appraisee offers vehicle trade-in, self-appraisal, auction, reconditioning valuation, work-in-progress tracker, reports, sales analysis, performance tracking, and smooth appraisal process."
+  },
+  {
+    "question": "Does appraisee support reconditioning work in progress tracker ?",
+    "answer": "Yes, appraisee supports reconditioning work-in-progress tracker with our in-house Prep My Vehicle web application."
+  },
+  {
+    "question": "Does appraisee support chat specific to a appraisal ?",
+    "answer": "Yes, appraisee supports chat specific to appraisals between Garage Admin, Supervisor, Sales Manager, and Sales Person."
+  },
+  {
+    "question": "Why dealership choose appraisee ?",
+    "answer": "Dealerships choose appraisee because of simplicity, efficiency, and accuracy of the complete appraisal process and its automated tasks."
+  },
+  {
+    "question": "What are the key features of Trader Bid platform ?",
+    "answer": "It includes no auction fees, optimized vehicle pricing, streamlined communication, centralized trade-in management, and collaborative dealer group functionality."
+  },
+  {
+    "question": "Why choose the appraisee app ?",
+    "answer": "Choose appraisee app for accurate appraisals, damage alerts, inventory features, estimated reconditioning costs, simplified workflows, enhanced collaboration, and instant digital records."
+  },
+  {
+    "question": "Where to find Account Manager details?",
+    "answer": "On the dealer dashboard."
+  },
+  {
+    "question": "What's your average response time?",
+    "answer": "On weekdays, average response time is 15 minutes."
+  },
+  {
+    "question": "How do we contact support email, phone, in-app?",
+    "answer": "You can contact support by all ways."
+  },
+  {
+    "question": "Can I try it before committing?(Is the 30-day free trial fully featured)",
+    "answer": "Yes, you can try it before committing and the free trial is fully featured."
+  },
+  {
+    "question": "Are there any hidden feed for SMS, trader texts, or data exports?",
+    "answer": "No, there is nothing hidden and everything is transparent to clients. Invoices contain every detail of charges with no charge on data exports."
+  },
+  {
+    "question": "Can appraisee help us track conversion rates?",
+    "answer": "Yes, appraisee surely helps you track conversion rates."
+  },
+  {
+    "question": "Is appraisee GDPR compliant?",
+    "answer": "Yes, appraisee is totally GDPR compliant."
+  },
+  {
+    "question": "Is there a widget or iframe we can embed on our dealership website?",
+    "answer": "Yes, there is a widget you can embed into your dealership website."
+  },
+  {
+    "question": "Can you give me a live demo of how an in-showroom appraisal works?",
+    "answer": "Yes, for live demo you can call the number mentioned on website or fill the Free Trial form."
+  },
+  {
+    "question": "Can I export appraisal and lead data to Excel or my CRM?",
+    "answer": "Yes, you can export appraisal and lead data to Excel or CSV format."
+  },
+  {
+    "question": "Does it integrate with AutoTrader, Motorcheck, or other lookup/valuation tools?",
+    "answer": "Yes, appraisee is integrated with AutoTrader, Motorcheck, Cartell, and other lookup/valuation tools."
+  },
+  {
+    "question": "Does Appraisee alert us if an appraisal is a duplicate or partially filled?",
+    "answer": "Yes, appraisee app shows runtime alert pop-ups during appraisal process if there is a duplicate appraisal with same registration number."
+  },
+  {
+    "question": "Where is my data stored, and who owns it?",
+    "answer": "Your data is securely stored in encrypted cloud infrastructure in the Irish region, fully GDPR compliant. You retain full ownership and control of your data."
+  },
+  {
+    "question": "Do we get a dedicated account manager?",
+    "answer": "Yes, you get a dedicated account manager when you onboard."
+  },
+  {
+    "question": "What services does Appraisee offer?",
+    "answer": "Appraisee provides in-dealership appraisals with VIN lookup and damage capture, Price My Car for customer self-appraisals, Trader Bid Platform for dealer-to-dealer bidding, and Prep My Vehicle for reconditioning tracking. Additional services include Sell My Car for public listings, ANPR for automatic number plate recognition, and comprehensive reporting and analytics dashboards. All services are cloud-based, GDPR-compliant, and integrate with third-party systems like Cartell, Motorcheck, and AutoTrader."
+  },
+  {
+    "question": "What are the different services that Appraisee provides?",
+    "answer": "Appraisee provides in-dealership appraisals with VIN lookup and damage capture, Price My Car for customer self-appraisals, Trader Bid Platform for dealer-to-dealer bidding, and Prep My Vehicle for reconditioning tracking. Additional services include Sell My Car for public listings, ANPR for automatic number plate recognition, and comprehensive reporting and analytics dashboards."
+  },
+  {
+    "question": "What services does Appraisee offer?",
+    "answer": "Appraisee offers vehicle appraisal tools including in-dealership assessments, customer self-appraisal forms, trader bidding platforms, and reconditioning trackers. The platform also provides ANPR technology, public car selling forms, and detailed analytics with reporting dashboards for dealership management."
+  },
+  {
+    "question": "What can Appraisee do for my dealership?",
+    "answer": "Appraisee can handle your vehicle trade-ins with digital appraisals, customer self-service tools, trader auction features, and work-in-progress tracking for reconditioning. It also provides automated number plate recognition, public selling options, and comprehensive performance analytics to streamline your entire appraisal workflow."
+  },
+  {
+    "question": "What features are available in Appraisee?",
+    "answer": "Appraisee features include VIN-based vehicle lookups, damage documentation with photos, customer Price My Car forms, and multi-trader bidding systems. The platform also offers reconditioning management, automatic plate recognition, customer selling portals, and detailed reporting with conversion tracking."
+  },
+  {
+    "question": "What modules does Appraisee have?",
+    "answer": "Appraisee has six core modules including In-Dealership Appraisal for staff assessments, Price My Car for customer submissions, and Trader Bid Platform for auction features. Other modules include Prep My Vehicle for reconditioning, Sell My Car for public listings, and ANPR for automated vehicle recognition."
+  },
+  {
+    "question": "What solutions does Appraisee provide for car dealers?",
+    "answer": "Appraisee provides digital trade-in solutions with staff appraisal tools, customer self-service forms, and live trader bidding capabilities. The platform includes reconditioning workflow management, automated vehicle identification, public selling options, and comprehensive analytics for dealership performance tracking."
+  },
+  {
+    "question": "Which dealership needs Appraisee?",
+    "answer": "Vehicle dealerships handling part-exchanges and trade-ins need Appraisee, especially those wanting to digitize their appraisal workflows and reduce manual paperwork."
+  },
+  {
+    "question": "What type of dealerships should use Appraisee?",
+    "answer": "Multi-location dealer groups and independent dealers managing trade-ins should use Appraisee to streamline valuations and improve customer interactions."
+  },
+  {
+    "question": "Who is Appraisee designed for?",
+    "answer": "Appraisee is designed for car dealerships in Ireland and UK that want to modernize their vehicle appraisal and trade-in processes."
+  },
+  {
+    "question": "Which car dealers benefit from Appraisee?",
+    "answer": "Car dealers with high trade-in volumes and those struggling with manual appraisal processes benefit most from Appraisee's digital solutions."
+  },
+  {
+    "question": "What kind of automotive businesses need Appraisee?",
+    "answer": "Automotive businesses focusing on used car sales, part-exchanges, and vehicle valuations need Appraisee to enhance efficiency and accuracy."
+  },
+  {
+    "question": "Is Appraisee suitable for my dealership?",
+    "answer": "Appraisee is suitable if your dealership handles trade-ins, wants better appraisal accuracy, or needs to reduce paperwork and improve team collaboration."
+  },
+  {
+    "question": "How can Appraisee benefit my business?",
+    "answer": "Appraisee boosts your business profits by improving vehicle valuations, reducing cost discrepancies, and streamlining the entire trade-in process from appraisal to reconditioning. It eliminates manual paperwork, provides real-time analytics, and offers customers convenient self-appraisal options that increase lead generation."
+  },
+  {
+    "question": "What benefits does Appraisee offer my dealership?",
+    "answer": "Appraisee offers improved sales performance, reduced paperwork, enhanced team collaboration, and accurate vehicle valuations with real-time analytics. The platform increases operational efficiency and provides customers with convenient digital appraisal tools that generate more qualified leads."
+  },
+  {
+    "question": "How will Appraisee improve my dealership operations?",
+    "answer": "Appraisee improves operations by digitizing manual processes, providing instant vehicle lookups, and enabling better pricing decisions through trader bidding. It reduces errors, saves time, and creates a complete audit trail for all appraisal activities."
+  },
+  {
+    "question": "What value does Appraisee bring to car dealers?",
+    "answer": "Appraisee brings increased profitability through better valuations, reduced reconditioning disputes, and streamlined workflows that save time and resources. It also enhances customer experience with self-service options and provides detailed performance insights for business growth."
+  },
+  {
+    "question": "Why should I choose Appraisee for my dealership?",
+    "answer": "Choose Appraisee for its complete end-to-end solution that combines in-showroom and online appraisals with live trader bidding in one platform. It offers improved accuracy, better customer service, and comprehensive analytics that directly impact your bottom line."
+  },
+  {
+    "question": "How does Appraisee help increase dealership profits?",
+    "answer": "Appraisee increases profits by ensuring accurate vehicle valuations, reducing reconditioning cost surprises, and enabling competitive trader bidding for better resale values. It also improves conversion rates through better customer experience and reduces operational costs through automation."
+  }
+]

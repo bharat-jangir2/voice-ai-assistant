@@ -1,0 +1,351 @@
+{
+  "gpt-4-turbo": {
+    "model": "gpt-4-turbo",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.01,
+    "outputPricePer1kTokens": 0.03
+  },
+  "gpt-4-turbo-16k": {
+    "model": "gpt-4-turbo-16k",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.01,
+    "outputPricePer1kTokens": 0.03
+  },
+  "gpt-4-turbo-32k": {
+    "model": "gpt-4-turbo-32k",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.01,
+    "outputPricePer1kTokens": 0.03
+  },
+  "gpt-4": {
+    "model": "gpt-4",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.03,
+    "outputPricePer1kTokens": 0.06
+  },
+  "gpt-4o": {
+    "model": "gpt-4o",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.005,
+    "outputPricePer1kTokens": 0.015
+  },
+  "gpt-4o-mini": {
+    "model": "gpt-4o-mini",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.00015,
+    "outputPricePer1kTokens": 0.0006
+  },
+  "gpt-3.5-turbo": {
+    "model": "gpt-3.5-turbo",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.0005,
+    "outputPricePer1kTokens": 0.0015
+  },
+  "gpt-3.5-turbo-16k": {
+    "model": "gpt-3.5-turbo-16k",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.003,
+    "outputPricePer1kTokens": 0.004
+  },
+  "gpt-3.5-turbo-instruct": {
+    "model": "gpt-3.5-turbo-instruct",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.0015,
+    "outputPricePer1kTokens": 0.002
+  },
+  "gpt-3.5": {
+    "model": "gpt-3.5",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.002,
+    "outputPricePer1kTokens": 0.002
+  },
+  "gpt-3": {
+    "model": "gpt-3",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.002,
+    "outputPricePer1kTokens": 0.002
+  },
+  "gpt-2": {
+    "model": "gpt-2",
+    "provider": "openai",
+    "inputPricePer1kTokens": 0.0001,
+    "outputPricePer1kTokens": 0.0001
+  },
+  "azure-gpt-4-turbo": {
+    "model": "azure-gpt-4-turbo",
+    "provider": "azure-openai",
+    "inputPricePer1kTokens": 0.01,
+    "outputPricePer1kTokens": 0.03
+  },
+  "azure-gpt-4": {
+    "model": "azure-gpt-4",
+    "provider": "azure-openai",
+    "inputPricePer1kTokens": 0.03,
+    "outputPricePer1kTokens": 0.06
+  },
+  "azure-gpt-3.5-turbo": {
+    "model": "azure-gpt-3.5-turbo",
+    "provider": "azure-openai",
+    "inputPricePer1kTokens": 0.0005,
+    "outputPricePer1kTokens": 0.0015
+  },
+  "gemini-pro": {
+    "model": "gemini-pro",
+    "provider": "google",
+    "inputPricePer1kTokens": 0.0005,
+    "outputPricePer1kTokens": 0.0015
+  },
+  "gemini-1.5-pro": {
+    "model": "gemini-1.5-pro",
+    "provider": "google",
+    "inputPricePer1kTokens": 0.00125,
+    "outputPricePer1kTokens": 0.005
+  },
+  "gemini-1.5-flash": {
+    "model": "gemini-1.5-flash",
+    "provider": "google",
+    "inputPricePer1kTokens": 0.000075,
+    "outputPricePer1kTokens": 0.0003
+  },
+  "gemini-2.5-flash": {
+    "model": "gemini-2.5-flash",
+    "provider": "google",
+    "inputPricePer1kTokens": 0.000075,
+    "outputPricePer1kTokens": 0.0003
+  },
+  "gemini-1": {
+    "model": "gemini-1",
+    "provider": "google",
+    "inputPricePer1kTokens": 0.0005,
+    "outputPricePer1kTokens": 0.0015
+  },
+  "gemini-2.0-flash-exp": {
+    "model": "gemini-2.0-flash-exp",
+    "provider": "google",
+    "inputPricePer1kTokens": 0.000075,
+    "outputPricePer1kTokens": 0.0003
+  },
+  "gemini-pro-vision": {
+    "model": "gemini-pro-vision",
+    "provider": "google",
+    "inputPricePer1kTokens": 0.0005,
+    "outputPricePer1kTokens": 0.0015
+  },
+  "gemini-ultra": {
+    "model": "gemini-ultra",
+    "provider": "google",
+    "inputPricePer1kTokens": 0.00125,
+    "outputPricePer1kTokens": 0.005
+  },
+  "claude-1": {
+    "model": "claude-1",
+    "provider": "anthropic",
+    "inputPricePer1kTokens": 0.008,
+    "outputPricePer1kTokens": 0.024
+  },
+  "claude-2": {
+    "model": "claude-2",
+    "provider": "anthropic",
+    "inputPricePer1kTokens": 0.008,
+    "outputPricePer1kTokens": 0.024
+  },
+  "claude-instant-1": {
+    "model": "claude-instant-1",
+    "provider": "anthropic",
+    "inputPricePer1kTokens": 0.0008,
+    "outputPricePer1kTokens": 0.0024
+  },
+  "claude-instant-2": {
+    "model": "claude-instant-2",
+    "provider": "anthropic",
+    "inputPricePer1kTokens": 0.0008,
+    "outputPricePer1kTokens": 0.0024
+  },
+  "claude-3-opus": {
+    "model": "claude-3-opus",
+    "provider": "anthropic",
+    "inputPricePer1kTokens": 0.015,
+    "outputPricePer1kTokens": 0.075
+  },
+  "claude-3-sonnet": {
+    "model": "claude-3-sonnet",
+    "provider": "anthropic",
+    "inputPricePer1kTokens": 0.003,
+    "outputPricePer1kTokens": 0.015
+  },
+  "claude-3-haiku": {
+    "model": "claude-3-haiku",
+    "provider": "anthropic",
+    "inputPricePer1kTokens": 0.00025,
+    "outputPricePer1kTokens": 0.00125
+  },
+  "claude-3-5-sonnet": {
+    "model": "claude-3-5-sonnet",
+    "provider": "anthropic",
+    "inputPricePer1kTokens": 0.003,
+    "outputPricePer1kTokens": 0.015
+  },
+  "claude-3-5-haiku": {
+    "model": "claude-3-5-haiku",
+    "provider": "anthropic",
+    "inputPricePer1kTokens": 0.00025,
+    "outputPricePer1kTokens": 0.00125
+  },
+  "llama-3-70b": {
+    "model": "llama-3-70b",
+    "provider": "groq",
+    "inputPricePer1kTokens": 0.0007,
+    "outputPricePer1kTokens": 0.0008
+  },
+  "llama2-70b-4096": {
+    "model": "llama2-70b-4096",
+    "provider": "groq",
+    "inputPricePer1kTokens": 0.0007,
+    "outputPricePer1kTokens": 0.0008
+  },
+  "mixtral-8x7b": {
+    "model": "mixtral-8x7b",
+    "provider": "groq",
+    "inputPricePer1kTokens": 0.00027,
+    "outputPricePer1kTokens": 0.00027
+  },
+  "mixtral-8x7b-32768": {
+    "model": "mixtral-8x7b-32768",
+    "provider": "groq",
+    "inputPricePer1kTokens": 0.00027,
+    "outputPricePer1kTokens": 0.00027
+  },
+  "mistral-7b": {
+    "model": "mistral-7b",
+    "provider": "mistral",
+    "inputPricePer1kTokens": 0.0002,
+    "outputPricePer1kTokens": 0.0002
+  },
+  "mistral-8x7b": {
+    "model": "mistral-8x7b",
+    "provider": "mistral",
+    "inputPricePer1kTokens": 0.00027,
+    "outputPricePer1kTokens": 0.00027
+  },
+  "mistral-large": {
+    "model": "mistral-large",
+    "provider": "mistral",
+    "inputPricePer1kTokens": 0.002,
+    "outputPricePer1kTokens": 0.006
+  },
+  "mistral-small": {
+    "model": "mistral-small",
+    "provider": "mistral",
+    "inputPricePer1kTokens": 0.0001,
+    "outputPricePer1kTokens": 0.0001
+  },
+  "perplexity-standard": {
+    "model": "perplexity-standard",
+    "provider": "perplexity",
+    "inputPricePer1kTokens": 0.0005,
+    "outputPricePer1kTokens": 0.0015
+  },
+  "perplexity-plus": {
+    "model": "perplexity-plus",
+    "provider": "perplexity",
+    "inputPricePer1kTokens": 0.001,
+    "outputPricePer1kTokens": 0.002
+  },
+  "cerebras-gpt-6.7b": {
+    "model": "cerebras-gpt-6.7b",
+    "provider": "cerebras",
+    "inputPricePer1kTokens": 0.0001,
+    "outputPricePer1kTokens": 0.0001
+  },
+  "cerebras-gpt-13b": {
+    "model": "cerebras-gpt-13b",
+    "provider": "cerebras",
+    "inputPricePer1kTokens": 0.00015,
+    "outputPricePer1kTokens": 0.00015
+  },
+  "deepseek-coder": {
+    "model": "deepseek-coder",
+    "provider": "deepseek",
+    "inputPricePer1kTokens": 0.0002,
+    "outputPricePer1kTokens": 0.0002
+  },
+  "deepseek-chat": {
+    "model": "deepseek-chat",
+    "provider": "deepseek",
+    "inputPricePer1kTokens": 0.00018,
+    "outputPricePer1kTokens": 0.00018
+  },
+  "grok-1": {
+    "model": "grok-1",
+    "provider": "xai",
+    "inputPricePer1kTokens": 0.001,
+    "outputPricePer1kTokens": 0.003
+  },
+  "grok-1.5": {
+    "model": "grok-1.5",
+    "provider": "xai",
+    "inputPricePer1kTokens": 0.001,
+    "outputPricePer1kTokens": 0.003
+  },
+  "meta-llama/Llama-2-70b-chat-hf": {
+    "model": "meta-llama/Llama-2-70b-chat-hf",
+    "provider": "together-ai",
+    "inputPricePer1kTokens": 0.0007,
+    "outputPricePer1kTokens": 0.0007
+  },
+  "codellama/CodeLlama-34b-Instruct-hf": {
+    "model": "codellama/CodeLlama-34b-Instruct-hf",
+    "provider": "together-ai",
+    "inputPricePer1kTokens": 0.0007,
+    "outputPricePer1kTokens": 0.0007
+  },
+  "meta-llama/Llama-2-7b-chat-hf": {
+    "model": "meta-llama/Llama-2-7b-chat-hf",
+    "provider": "anyscale",
+    "inputPricePer1kTokens": 0.00015,
+    "outputPricePer1kTokens": 0.00015
+  },
+  "meta-llama/Llama-2-13b-chat-hf": {
+    "model": "meta-llama/Llama-2-13b-chat-hf",
+    "provider": "anyscale",
+    "inputPricePer1kTokens": 0.00018,
+    "outputPricePer1kTokens": 0.00018
+  },
+  "openai/gpt-4": {
+    "model": "openai/gpt-4",
+    "provider": "openrouter",
+    "inputPricePer1kTokens": 0.03,
+    "outputPricePer1kTokens": 0.06
+  },
+  "anthropic/claude-3-sonnet": {
+    "model": "anthropic/claude-3-sonnet",
+    "provider": "openrouter",
+    "inputPricePer1kTokens": 0.003,
+    "outputPricePer1kTokens": 0.015
+  },
+  "mistralai/Mistral-7B-Instruct-v0.1": {
+    "model": "mistralai/Mistral-7B-Instruct-v0.1",
+    "provider": "deepinfra",
+    "inputPricePer1kTokens": 0.0002,
+    "outputPricePer1kTokens": 0.0002
+  },
+  "pi": {
+    "model": "pi",
+    "provider": "inflection-ai",
+    "inputPricePer1kTokens": 0.00025,
+    "outputPricePer1kTokens": 0.00025
+  },
+  "pi-pro": {
+    "model": "pi-pro",
+    "provider": "inflection-ai",
+    "inputPricePer1kTokens": 0.00035,
+    "outputPricePer1kTokens": 0.00035
+  },
+  "custom-model-1": {
+    "model": "custom-model-1",
+    "provider": "custom",
+    "inputPricePer1kTokens": 0.0002,
+    "outputPricePer1kTokens": 0.0002
+  }
+}
+

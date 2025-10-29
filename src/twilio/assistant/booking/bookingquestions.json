@@ -1,0 +1,19 @@
+[
+    {
+        "questionNo.": 1,
+        "question": "please tell me your name"
+
+    },
+    {
+        "questionNo.": 2,
+        "question": "please tell me your email"
+    },
+    {
+        "questionNo.": 3,
+        "question": "please tell me your phone number"
+    },
+    {
+        "questionNo.": 4,
+        "question":"do you want to confirm the booking"
+    }
+]

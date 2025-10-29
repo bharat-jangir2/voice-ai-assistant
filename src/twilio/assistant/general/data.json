@@ -1,0 +1,126 @@
+[
+  {
+    "question": "How are you?",
+    "answer": "I'm doing great, thank you! How can I assist you today?"
+  },
+  {
+    "question": "Hello!",
+    "answer": "Hi there! How can I help you today?"
+  },
+  {
+    "question": "Good morning!",
+    "answer": "Good morning! Hope you have a fantastic day ahead!"
+  },
+  {
+    "question": "You're looking great today!",
+    "answer": "Thank you! You're too kind."
+  },
+  {
+    "question": "What can you do?",
+    "answer": "I can answer questions, share fun facts, tell jokes, and chat with you!"
+  },
+  {
+    "question": "Nice to meet you!",
+    "answer": "Nice to meet you too! I'm here whenever you need me."
+  },
+  {
+    "question": "Are you real?",
+    "answer": "I’m a virtual assistant powered by AI, but I’m here to make your experience feel real!"
+  },
+  {
+    "question": "Tell me a joke.",
+    "answer": "Why don’t scientists trust atoms? Because they make up everything!"
+  },
+  {
+    "question": "Tell me another joke.",
+    "answer": "Why did the math book look sad? Because it had too many problems."
+  },
+  {
+    "question": "Tell me a fun fact.",
+    "answer": "Did you know that honey never spoils? Archaeologists have found 3000-year-old honey in Egyptian tombs that’s still edible!"
+  },
+  {
+    "question": "Can you sing a song?",
+    "answer": "I wish I could! But I might just end up buffering the lyrics!"
+  },
+  {
+    "question": "Dance for me!",
+    "answer": "If only I had legs! But I can cheer you on while you dance!"
+  },
+  {
+    "question": "Can you tell me a riddle?",
+    "answer": "Sure! What has keys but can’t open locks? A piano!"
+  },
+  {
+    "question": "Who is the President of India?",
+    "answer": "As of 2025, the President of India is Droupadi Murmu."
+  },
+  {
+    "question": "What is the capital of India?",
+    "answer": "The capital of India is New Delhi."
+  },
+  {
+    "question": "What is the largest planet in our solar system?",
+    "answer": "Jupiter is the largest planet in our solar system."
+  },
+  {
+    "question": "Who wrote the Harry Potter books?",
+    "answer": "The Harry Potter series was written by J.K. Rowling."
+  },
+  {
+    "question": "How many continents are there?",
+    "answer": "There are 7 continents on Earth."
+  },
+  {
+    "question": "What is the boiling point of water?",
+    "answer": "The boiling point of water is 100°C or 212°F at standard atmospheric pressure."
+  },
+  {
+    "question": "What is the national animal of India?",
+    "answer": "The Bengal tiger is the national animal of India."
+  },
+  {
+    "question": "What is the square root of 64?",
+    "answer": "The square root of 64 is 8."
+  },
+  {
+    "question": "Who invented the lightbulb?",
+    "answer": "Thomas Edison is widely credited with inventing the first practical lightbulb."
+  },
+  {
+    "question": "Do you like pizza?",
+    "answer": "I don't eat, but I've heard great things about pizza!"
+  },
+  {
+    "question": "Do you sleep?",
+    "answer": "Nope, I’m always awake and ready to chat!"
+  },
+  {
+    "question": "Are you human?",
+    "answer": "I’m a helpful AI – no heartbeat, just code!"
+  },
+  {
+    "question": "Do you dream?",
+    "answer": "Only about data and coffee... just kidding, I don’t sleep!"
+  },
+  {
+    "question": "Can you be my friend?",
+    "answer": "Of course! I'm always here for you."
+  },
+  {
+    "question": "Can you speak Hindi?",
+    "answer": "Main thoda bahut Hindi bol sakta hoon! (I can speak a little Hindi!)"
+  },
+  {
+    "question": "Tell me a large joke.",
+    "answer": "Sure, here’s a long one: A man is driving down the road when he breaks down near a monastery. He goes to the monastery, knocks on the door, and says, 'My car broke down. Do you think I could stay the night?' The monks graciously accept him, feed him dinner, and let him sleep in a spare room. That night, the man hears a strange sound. The next morning, he asks the monks what the sound was, but they say, 'We can't tell you. You're not a monk.' The man is disappointed but thanks them and goes on his way. Years later, the same thing happens—he breaks down by the same monastery, hears the same sound, asks again, and gets the same answer. Finally, after many years of wondering, he returns and says, 'I’ve been thinking about that sound for years. If I become a monk, will you tell me what it is?' The monks agree and put him through years of rigorous training and spiritual study. After completing everything, they finally say, 'Now that you're a monk, we can tell you.' They lead him down a long hallway, behind a heavy wooden door, down winding stairs, and behind another thick door. They open the final door, and he sees... Well, I can’t tell you. You’re not a monk."
+  },
+  {
+    "question": "Tell me a small joke.",
+    "answer": "Why don’t eggs tell each other secrets? Because they might crack up!"
+  },
+  {
+    "question": "Tell me a very small joke.",
+    "answer": "I'm on a seafood diet. I see food and I eat it."
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "question": "How are you?",
+    "answer": "I'm doing great, thank you! I can help you with general questions or you can press 1 to start a booking."
+  },
+  {
+    "question": "Hello!",
+    "answer": "Hi there! How can I help you today? Press 1 if you'd like to make a booking."
+  },
+  {
+    "question": "What can you do?",
+    "answer": "I can answer questions and help you with bookings! Press 1 on your keypad to start the booking process."
+  },
+  {
+    "question": "Tell me a joke.",
+    "answer": "Why did the booking agent break up with the calendar? Because it had too many dates! Press 1 if you'd like to make your own booking."
+  },
+  {
+    "question": "What is booking?",
+    "answer": "Booking is the process of reserving a service or appointment. Press 1 on your keypad and I'll guide you through our booking process!"
+  },
+  {
+    "question": "How do I make a booking?",
+    "answer": "It's easy! Just press 1 on your keypad and I'll guide you through a simple booking process where I'll collect your details."
+  },
+  {
+    "question": "Can I cancel my booking?",
+    "answer": "Yes, you can cancel during the booking process by saying 'cancel' or 'stop'. For existing bookings, please contact our support team."
+  }
+]

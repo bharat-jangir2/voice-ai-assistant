@@ -1,0 +1,327 @@
+[
+    {
+      "question": "I want to book a doctor appointment",
+      "answer": "Okay, are you looking for a specific doctor or a department?"
+    },
+    {
+      "question": "I want a specific doctor",
+      "answer": "Sure, please tell me the doctor's name you'd like to consult."
+    },
+    {
+      "question": "I want a specific department",
+      "answer": "Alright, which department do you want to book the appointment for? (e.g., Cardiology, Orthopedics, Pediatrics)"
+    },
+    {
+      "question": "Cardiology",
+      "answer": "Got it. Do you have any preferred date and time for the appointment?"
+    },
+    {
+      "question": "Orthopedics",
+      "answer": "Understood. When would you like to come in? We have slots available this week."
+    },
+    {
+      "question": "Pediatrics",
+      "answer": "Alright. Is the appointment for your child? Please mention their age for better scheduling."
+    },
+    {
+      "question": "Dr. Mehta",
+      "answer": "Dr. Mehta is available on Monday, Wednesday, and Friday. What date would you prefer?"
+    },
+    {
+      "question": "Tomorrow",
+      "answer": "Let me check Dr. Mehta's availability for tomorrow. Do you prefer morning or evening?"
+    },
+    {
+      "question": "Morning",
+      "answer": "Dr. Mehta has an open slot at 10:30 AM. Shall I confirm your booking?"
+    },
+    {
+      "question": "Evening",
+      "answer": "Dr. Mehta is available at 5:00 PM. Should I go ahead and confirm the appointment?"
+    },
+    {
+      "question": "Yes, please confirm",
+      "answer": "Your appointment has been scheduled. You'll receive a confirmation SMS shortly. Can I help you with anything else?"
+    },
+    {
+      "question": "No, thank you",
+      "answer": "You're welcome! Have a great day and take care."
+    },
+    {
+      "question": "Can I cancel my appointment?",
+      "answer": "Sure, please share your registered phone number or appointment ID for verification."
+    },
+    {
+      "question": "Can I reschedule my appointment?",
+      "answer": "Of course. What new date and time would you prefer?"
+    },
+    {
+      "question": "What are your visiting hours?",
+      "answer": "Our OPD timings are from 9 AM to 7 PM, Monday to Saturday."
+    },
+    {
+      "question": "Do you have emergency services?",
+      "answer": "Yes, our emergency department is open 24/7. Would you like to request an ambulance?"
+    },
+    {
+      "question": "Are walk-ins allowed?",
+      "answer": "Yes, walk-ins are allowed but appointments are preferred to reduce waiting time."
+    },
+    {
+      "question": "Can I get my reports online?",
+      "answer": "Yes, reports are available on our patient portal. Would you like the login link sent to your phone?"
+    },
+    {
+      "question": "Do you accept insurance?",
+      "answer": "Yes, we accept major insurance providers. May I know your insurance company?"
+    },
+    {
+      "question": "Where is the hospital located?",
+      "answer": "We are located at 123 Wellness Street, Newtown. Would you like directions via SMS?"
+    },
+    {
+      "question": "I need a second opinion",
+      "answer": "Sure, which department or condition is this regarding?"
+    },
+    {
+      "question": "Do you have lab testing?",
+      "answer": "Yes, we offer full diagnostic testing. Would you like to book a test or speak to lab support?"
+    },
+    {
+      "question": "What is the COVID testing timing?",
+      "answer": "COVID testing is available daily from 8 AM to 6 PM. Would you like to schedule a test?"
+    },
+    {
+      "question": "Is there a pharmacy in the hospital?",
+      "answer": "Yes, our in-house pharmacy is open from 8 AM to 10 PM every day. Do you want to check medicine availability?"
+    },
+    {
+      "question": "Can I check the status of my appointment?",
+      "answer": "Sure, please provide your registered mobile number or appointment ID."
+    },
+    {
+      "question": "I need to talk to the billing department",
+      "answer": "Connecting you to our billing department. Please hold for a moment."
+    },
+    {
+      "question": "What payment methods are accepted?",
+      "answer": "We accept cash, credit/debit cards, UPI, and most health insurance providers."
+    },
+    {
+      "question": "Can I get a bill copy?",
+      "answer": "Yes, you can collect a printed copy at the billing counter or request a PDF via SMS/email."
+    },
+    {
+      "question": "Do you offer health checkup packages?",
+      "answer": "Yes, we offer general and specialized health packages. Would you like me to send the list to your phone?"
+    },
+    {
+      "question": "Is ambulance service available?",
+      "answer": "Yes, 24/7 ambulance services are available. Do you need one dispatched now?"
+    },
+    {
+      "question": "Can I talk to a nurse?",
+      "answer": "Certainly. Please tell me your concern and I'll connect you to a duty nurse."
+    },
+    {
+      "question": "What documents are needed for admission?",
+      "answer": "You need ID proof, insurance documents (if applicable), and previous medical reports."
+    },
+    {
+      "question": "How can I discharge a patient?",
+      "answer": "Discharge is processed by the concerned doctor. Please share the patient ID or room number."
+    },
+    {
+      "question": "Is wheelchair assistance available?",
+      "answer": "Yes, wheelchair and stretcher assistance is available at the main entrance. Do you need help now?"
+    },
+    {
+      "question": "Do you provide home sample collection?",
+      "answer": "Yes, home collection is available for lab tests. Shall I schedule a technician to visit your location?"
+    },
+    {
+      "question": "Is there parking at the hospital?",
+      "answer": "Yes, we have a dedicated parking area for visitors and patients."
+    },
+    {
+      "question": "Can I talk to the doctor directly?",
+      "answer": "Doctors are available during their OPD hours. May I schedule a callback or appointment for you?"
+    },
+    {
+      "question": "I have a fever, what should I do?",
+      "answer": "You may need to visit our general physician. Would you like me to book an appointment?"
+    },
+    {
+      "question": "I need physiotherapy after surgery",
+      "answer": "Sure, our rehab unit can help. Shall I connect you to the physiotherapy department?"
+    },
+    {
+      "question": "Do you offer dietitian consultation?",
+      "answer": "Yes, our dietitian is available on weekdays. Would you like to book a consultation?"
+    },
+    {
+      "question": "Is blood test fasting required?",
+      "answer": "Some blood tests require fasting. Would you like me to check for your specific test?"
+    },
+    {
+      "question": "Do you have a neurologist?",
+      "answer": "Yes, Dr. Ankit Bansal specializes in neurology. Would you like to book an appointment?"
+    },
+    {
+      "question": "How do I give feedback?",
+      "answer": "You can share feedback via SMS, WhatsApp, or the hospital website. Would you like the link?"
+    },
+    {
+      "question": "Do you have a neurology department?",
+      "answer": "Yes, we have an excellent neurology department with specialists in various neurological conditions. Would you like to schedule an appointment?"
+    },
+    {
+      "question": "Is there a cardiology department?",
+      "answer": "Yes, our cardiology department offers comprehensive heart care services. Would you like to speak with a cardiologist?"
+    },
+    {
+      "question": "Do you have pediatric services?",
+      "answer": "Yes, our pediatrics department provides care for children of all ages. Would you like to schedule an appointment for your child?"
+    },
+    {
+      "question": "What are your emergency services?",
+      "answer": "Our emergency department is open 24/7 with fully equipped facilities and experienced staff for all medical emergencies."
+    },
+    {
+      "question": "How can I get my test results?",
+      "answer": "Your test results can be accessed through our patient portal or collected in person. Would you like me to send you the portal link?"
+    },
+    {
+      "question": "Do you have MRI services?",
+      "answer": "Yes, we offer MRI services with state-of-the-art equipment. Would you like to schedule an MRI scan?"
+    },
+    {
+      "question": "Is there a cafeteria?",
+      "answer": "Yes, we have a cafeteria on the ground floor that serves fresh meals daily from 7 AM to 9 PM."
+    },
+    {
+      "question": "Do you have specialists for diabetes?",
+      "answer": "Yes, our endocrinology department specializes in diabetes care and management. Would you like to schedule a consultation?"
+    },
+    {
+      "question": "What insurance do you accept?",
+      "answer": "We accept most major insurance providers including Medicare, Medicaid, Blue Cross, Aetna, and UnitedHealthcare."
+    },
+    {
+      "question": "Do you have an oncology department?",
+      "answer": "Yes, our oncology department provides comprehensive cancer care with experienced specialists. Would you like to schedule a consultation?"
+    },
+    {
+      "question": "Is there a gynecology department?",
+      "answer": "Yes, we have a gynecology department with specialists in women's health. Would you like to book an appointment?"
+    },
+    {
+      "question": "Do you have a dermatology clinic?",
+      "answer": "Yes, our dermatology department offers treatments for all skin conditions. Would you like to schedule an appointment?"
+    },
+    {
+      "question": "Is there a psychiatry department?",
+      "answer": "Yes, we have a psychiatry department with specialists in mental health care. Would you like to schedule a consultation?"
+    },
+    {
+      "question": "Do you have an ENT specialist?",
+      "answer": "Yes, we have ENT specialists who treat ear, nose, and throat conditions. Would you like to book an appointment?"
+    },
+    {
+      "question": "Is there a urology department?",
+      "answer": "Yes, our urology department provides care for urinary tract and male reproductive system issues. Would you like to schedule an appointment?"
+    },
+    {
+      "question": "Do you have a gastroenterology department?",
+      "answer": "Yes, our gastroenterology department specializes in digestive system disorders. Would you like to book a consultation?"
+    },
+    {
+      "question": "Is there a nephrology department?",
+      "answer": "Yes, we have a nephrology department that specializes in kidney care. Would you like to schedule an appointment?"
+    },
+    {
+      "question": "Do you have a pulmonology department?",
+      "answer": "Yes, our pulmonology department specializes in respiratory conditions. Would you like to book a consultation?"
+    },
+    {
+      "question": "Is there a rheumatology department?",
+      "answer": "Yes, we have rheumatologists who treat arthritis and other joint conditions. Would you like to schedule an appointment?"
+    },
+    {
+      "question": "Do you have an ophthalmology department?",
+      "answer": "Yes, our ophthalmology department provides comprehensive eye care services. Would you like to book an eye examination?"
+    },
+    {
+      "question": "What are the visiting hours for inpatients?",
+      "answer": "Visiting hours for inpatients are from 10 AM to 12 PM and 4 PM to 8 PM daily."
+    },
+    {
+      "question": "How do I get a medical certificate?",
+      "answer": "Medical certificates can be requested from your treating doctor during your appointment or by contacting our medical records department."
+    },
+    {
+      "question": "Do you have CT scan facilities?",
+      "answer": "Yes, we offer CT scan services with the latest technology. Would you like to schedule a scan?"
+    },
+    {
+      "question": "Is there an ultrasound facility?",
+      "answer": "Yes, we provide ultrasound services for various diagnostic needs. Would you like to book an appointment?"
+    },
+    {
+      "question": "Do you have X-ray services?",
+      "answer": "Yes, our radiology department offers X-ray services. Would you like to schedule an X-ray?"
+    },
+    {
+      "question": "Is there a dental clinic?",
+      "answer": "Yes, our dental clinic offers comprehensive dental care services. Would you like to book an appointment with a dentist?"
+    },
+    {
+      "question": "Do you have a maternity ward?",
+      "answer": "Yes, we have a well-equipped maternity ward with experienced obstetricians. Would you like to schedule a prenatal consultation?"
+    },
+    {
+      "question": "Is there an ICU?",
+      "answer": "Yes, we have a state-of-the-art Intensive Care Unit with 24/7 monitoring and specialized care."
+    },
+    {
+      "question": "Do you have a neonatal ICU?",
+      "answer": "Yes, our NICU provides specialized care for newborns requiring intensive monitoring and treatment."
+    },
+    {
+      "question": "Is there a cardiac ICU?",
+      "answer": "Yes, we have a dedicated Cardiac ICU for patients with serious heart conditions requiring intensive care."
+    },
+    {
+      "question": "Do you have a blood bank?",
+      "answer": "Yes, our hospital has a fully equipped blood bank that operates 24/7 for all blood component needs."
+    },
+    {
+      "question": "How do I donate blood?",
+      "answer": "You can donate blood at our blood bank between 9 AM and 5 PM any day. Would you like me to schedule a donation appointment?"
+    },
+    {
+      "question": "Do you have a dialysis center?",
+      "answer": "Yes, our dialysis center provides both hemodialysis and peritoneal dialysis services. Would you like to schedule a consultation?"
+    },
+    {
+      "question": "Is there a vaccination center?",
+      "answer": "Yes, we offer vaccination services for all age groups. Would you like to schedule a vaccination appointment?"
+    },
+    {
+      "question": "Do you have a pain management clinic?",
+      "answer": "Yes, our pain management clinic provides specialized care for chronic pain conditions. Would you like to book a consultation?"
+    },
+    {
+      "question": "Is there a sports medicine department?",
+      "answer": "Yes, our sports medicine department specializes in treating sports-related injuries. Would you like to schedule an appointment?"
+    },
+    {
+      "question": "Do you have a geriatric care unit?",
+      "answer": "Yes, we have a geriatric care unit specializing in healthcare for elderly patients. Would you like to book a consultation?"
+    },
+    {
+      "question": "Is there a sleep disorder clinic?",
+      "answer": "Yes, our sleep disorder clinic diagnoses and treats various sleep-related conditions. Would you like to schedule a sleep study?"
+    }
+  ]
+  
