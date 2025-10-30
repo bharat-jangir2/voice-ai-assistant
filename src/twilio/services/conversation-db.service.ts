@@ -269,8 +269,8 @@ export class ConversationDbService {
    */
   async getConversations(
     organizationId: string,
+    page: number = 1,
     limit: number = 50,
-    offset: number = 0,
   ): Promise<{ conversations: ConversationEntity[]; total: number }> {
     this.logger.log(`🚀 [CONVERSATION DB] Getting conversations for organization: ${organizationId}`);
 
@@ -278,8 +278,8 @@ export class ConversationDbService {
       const response = await firstValueFrom(
         this.userServiceClient.send('conversation:get-list', {
           organizationId,
+          page,
           limit,
-          offset,
         }),
       );
 
@@ -306,8 +306,8 @@ export class ConversationDbService {
   async getConversationsByType(
     organizationId: string,
     type: 'chat' | 'phoneCall' | 'webCall' | 'sms',
+    page: number = 1,
     limit: number = 50,
-    offset: number = 0,
   ): Promise<{ conversations: ConversationEntity[]; total: number }> {
     this.logger.log(`🚀 [CONVERSATION DB] Getting ${type} conversations for organization: ${organizationId}`);
 
@@ -316,8 +316,8 @@ export class ConversationDbService {
         this.userServiceClient.send('conversation:get-by-type', {
           organizationId,
           type,
+          page,
           limit,
-          offset,
         }),
       );
 

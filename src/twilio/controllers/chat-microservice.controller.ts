@@ -1,4 +1,4 @@
-import { Controller, Logger, Inject } from '@nestjs/common';
+import { Controller, Logger, Inject, Get, Query } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { DirectAIService } from '../services/direct-ai.service';
 import { ConversationDbService } from '../services/conversation-db.service';
@@ -54,6 +54,275 @@ export class ChatMicroserviceController {
     private readonly costCalculationService: CostCalculationService,
     @Inject('userService') private readonly userServiceClient: any,
   ) {}
+
+  // Note: HTTP route for logs removed to enforce microservice-only access
+
+  // Microservice: Returns chat conversations(chat logs) with message counts (paginated)
+  @MessagePattern('chat:get-logs')
+  async msGetChatLogs(
+    @Payload()
+    payload: {
+      headers?: any;
+      requestedUser?: any;
+      query?: { organizationId?: string; page?: number | string; limit?: number | string; chatId?: string; assistantId?: string };
+    },
+  ) {
+    try {
+      const orgFromJwt = payload?.requestedUser?.organizationId;
+      const q = payload?.query || {};
+      const orgId = q.organizationId || orgFromJwt;
+      const pageNum = Math.max(parseInt((q.page as any) || '1', 10) || 1, 1);
+      const limitNum = Math.min(Math.max(parseInt((q.limit as any) || '20', 10) || 20, 1), 100);
+      const offsetNum = (pageNum - 1) * limitNum;
+      const chatId = q.chatId as string | undefined;
+      const assistantId = q.assistantId as string | undefined;
+
+      if (!orgId) {
+        return this.errorResponse('organizationId is required', 'ORGANIZATION_ID_REQUIRED');
+      }
+
+      // If a specific chat is requested
+      if (chatId) {
+        const conv = await this.conversationDbService.getConversation(chatId);
+        const single = conv
+          ? [
+              {
+                _id: conv._id,
+                organizationId: conv.organizationId,
+                assistantId: conv.assistantId,
+                userId: conv.userId,
+                type: conv.type,
+                direction: conv.direction,
+                status: conv.status,
+                stream: conv.stream,
+                startedAt: conv.startedAt,
+                lastActivityAt: conv.lastActivityAt,
+                messageCount: conv?.conversationMetrics?.totalMessages ?? 0,
+              },
+            ]
+          : [];
+
+        return {
+          success: true,
+          statusCode: 200,
+          userMessage: 'Chat logs fetched successfully',
+          userMessageCode: 'CHAT_LOGS_FETCHED_SUCCESS',
+          developerMessage: 'Conversations list with message counts',
+          data: {
+            result: single,
+            pagination: {
+              page: 1,
+              limit: single.length || limitNum,
+              total: single.length,
+              hasNext: false,
+              hasPrev: false,
+            },
+          },
+        };
+      }
+
+      const { conversations, total } = await this.conversationDbService.getConversations(orgId, pageNum, limitNum);
+
+      let items = (conversations || []).map((c: any) => ({
+        _id: c._id,
+        organizationId: c.organizationId,
+        assistantId: c.assistantId,
+        userId: c.userId,
+        type: c.type,
+        direction: c.direction,
+        status: c.status,
+        stream: c.stream,
+        startedAt: c.startedAt,
+        lastActivityAt: c.lastActivityAt,
+        messageCount: c?.conversationMetrics?.totalMessages ?? 0,
+      }));
+
+      if (assistantId) {
+        items = items.filter((c: any) => c.assistantId?.toString() === assistantId);
+      }
+
+      return {
+        success: true,
+        statusCode: 200,
+        userMessage: 'Chat logs fetched successfully',
+        userMessageCode: 'CHAT_LOGS_FETCHED_SUCCESS',
+        developerMessage: 'Conversations list with message counts',
+        data: {
+          result: items,
+          pagination: {
+            page: pageNum,
+            limit: limitNum,
+            total,
+            hasNext: offsetNum + items.length < total,
+            hasPrev: pageNum > 1,
+          },
+        },
+      };
+    } catch (error) {
+      this.logger.error('Failed to get chat logs', error);
+      return this.errorResponse('Failed to get chat logs', 'CHAT_LOGS_FETCH_FAILED');
+    }
+  }
+
+  // Microservice: Returns paginated messages for a conversation (same response shape)
+  @MessagePattern('chat:get-messages')
+  async msGetConversationMessages(
+    @Payload()
+    payload: {
+      headers?: any;
+      requestedUser?: any;
+      query?: { chatId: string; page?: number | string; limit?: number | string; role?: string };
+    },
+  ) {
+    try {
+      const q = payload?.query || ({} as any);
+      const conversationId = q.chatId as string;
+      const pageNum = Math.max(parseInt((q.page as any) || '1', 10) || 1, 1);
+      const limitNum = Math.min(Math.max(parseInt((q.limit as any) || '20', 10) || 20, 1), 100);
+      const roleFilter = (q.role || '').toString().toLowerCase();
+
+      if (!conversationId) {
+        return this.errorResponse('chatId is required', 'CHAT_ID_REQUIRED');
+      }
+
+      // Get total from conversation metrics
+      const conversation = await this.conversationDbService.getConversation(conversationId);
+      const metrics = conversation?.conversationMetrics || {};
+      const totalFromMetrics =
+        roleFilter === 'user'
+          ? metrics.userMessages
+          : roleFilter === 'assistant'
+            ? metrics.assistantMessages
+            : metrics.totalMessages;
+
+      // Fetch paginated messages
+      const messages = await this.conversationDbService.getConversationMessages(conversationId, pageNum, limitNum);
+
+      let items = (messages || []).map((m: any) => ({
+        _id: m._id,
+        conversationId: m.conversationId,
+        organizationId: m.organizationId,
+        assistantId: m.assistantId,
+        userId: m.userId,
+        role: m.role,
+        content: m.content,
+        timestamp: m.timestamp || m.createdAt,
+        source: m.source,
+        metadata: m.metadata,
+      }));
+
+      if (roleFilter) {
+        items = items.filter((m: any) => (m.role || '').toLowerCase() === roleFilter);
+      }
+
+      const total = typeof totalFromMetrics === 'number' ? totalFromMetrics : items.length;
+
+      return {
+        success: true,
+        statusCode: 200,
+        userMessage: 'Conversation messages fetched successfully',
+        userMessageCode: 'CONVERSATION_MESSAGES_FETCHED_SUCCESS',
+        developerMessage: 'Paginated conversation messages',
+        data: {
+          result: items,
+          pagination: {
+            page: pageNum,
+            limit: limitNum,
+            total,
+            hasNext: pageNum * limitNum < total,
+            hasPrev: pageNum > 1,
+          },
+        },
+      };
+    } catch (error) {
+      this.logger.error('Failed to get conversation messages', error);
+      return this.errorResponse('Failed to get conversation messages', 'CONVERSATION_MESSAGES_FETCH_FAILED');
+    }
+  }
+
+  // Microservice: Soft delete a conversation and optionally its messages
+  @MessagePattern('chat:delete-conversation')
+  async msDeleteConversation(
+    @Payload() payload: { conversationId: string; deleteMessages?: boolean; headers?: any; requestedUser?: any },
+  ) {
+    try {
+      const { conversationId, deleteMessages = true } = payload || ({} as any);
+      if (!conversationId) {
+        return this.errorResponse('conversationId is required', 'CONVERSATION_ID_REQUIRED');
+      }
+
+      const response: any = await firstValueFrom(
+        this.userServiceClient.send('conversation:soft-delete', { conversationId, deleteMessages }),
+      );
+
+      if (!response?.success) {
+        const notFound =
+          response?.statusCode === 404 || response?.error === 'NotFoundException' || /not found/i.test(response?.message || '');
+        return {
+          success: false,
+          statusCode: notFound ? 404 : 400,
+          userMessage: response?.message || 'Failed to delete conversation',
+          userMessageCode: notFound ? 'CONVERSATION_NOT_FOUND' : 'CONVERSATION_DELETE_FAILED',
+          developerMessage: response?.message || 'Failed to delete conversation',
+          data: { result: { conversationId } },
+        };
+      }
+
+      return {
+        success: true,
+        statusCode: 200,
+        userMessage: 'Conversation deleted successfully',
+        userMessageCode: 'CONVERSATION_DELETE_SUCCESS',
+        developerMessage: 'Conversation soft-deleted',
+        data: {
+          result: response.data,
+        },
+      };
+    } catch (error) {
+      this.logger.error('Failed to delete conversation', error);
+      return this.errorResponse('Failed to delete conversation', 'CONVERSATION_DELETE_FAILED');
+    }
+  }
+
+  // Microservice: Soft delete a single message
+  @MessagePattern('chat:delete-message')
+  async msDeleteMessage(@Payload() payload: { messageId: string }) {
+    try {
+      const { messageId } = payload || ({} as any);
+      if (!messageId) {
+        return this.errorResponse('messageId is required', 'MESSAGE_ID_REQUIRED');
+      }
+
+      const response: any = await firstValueFrom(this.userServiceClient.send('conversation:soft-delete-message', { messageId }));
+
+      if (!response?.success) {
+        const notFound =
+          response?.statusCode === 404 || response?.error === 'NotFoundException' || /not found/i.test(response?.message || '');
+        return {
+          success: false,
+          statusCode: notFound ? 404 : 400,
+          userMessage: response?.message || 'Failed to delete message',
+          userMessageCode: notFound ? 'MESSAGE_NOT_FOUND' : 'MESSAGE_DELETE_FAILED',
+          developerMessage: response?.message || 'Failed to delete message',
+          data: { result: { messageId } },
+        };
+      }
+
+      return {
+        success: true,
+        statusCode: 200,
+        userMessage: 'Message deleted successfully',
+        userMessageCode: 'MESSAGE_DELETE_SUCCESS',
+        developerMessage: 'Message soft-deleted',
+        data: {
+          result: response.data,
+        },
+      };
+    } catch (error) {
+      this.logger.error('Failed to delete message', error);
+      return this.errorResponse('Failed to delete message', 'MESSAGE_DELETE_FAILED');
+    }
+  }
 
   /**
    * Handle message request - combines session creation and messaging
@@ -255,14 +524,25 @@ export class ChatMicroserviceController {
 
     // Check if existing session is expired (older than 24 hours)
     if (conversation) {
-      const sessionAge = Date.now() - new Date(conversation.createdAt).getTime();
+      // Use startedAt if available, otherwise fall back to createdAt
+      const sessionStartTime = conversation.startedAt
+        ? new Date(conversation.startedAt).getTime()
+        : new Date(conversation.createdAt).getTime();
+
+      const sessionAge = Date.now() - sessionStartTime;
       const twentyFourHours = 24 * 60 * 60 * 1000;
 
+      this.logger.log(`🔍 [SESSION] Session age check: ${Math.round(sessionAge / (60 * 60 * 1000))} hours old (max: 24 hours)`);
+
       if (sessionAge > twentyFourHours) {
-        this.logger.log(`🔄 [SESSION] Session expired, creating new one for ${sessionKey}`);
+        this.logger.log(
+          `🔄 [SESSION] Session expired (${Math.round(sessionAge / (60 * 60 * 1000))} hours old), creating new one for ${sessionKey}`,
+        );
         conversation = null; // Force creation of new session
       } else {
-        this.logger.log(`✅ [SESSION] Using existing active session: ${conversation._id}`);
+        this.logger.log(
+          `✅ [SESSION] Using existing active session: ${conversation._id} (${Math.round(sessionAge / (60 * 60 * 1000))} hours old)`,
+        );
       }
     }
 
@@ -757,8 +1037,8 @@ export class ChatMicroserviceController {
       const result = await this.conversationDbService.getConversationsByType(
         organizationId,
         'chat',
-        1, // limit to 1
-        0, // offset 0
+        1, // page 1
+        1, // limit 1
       );
 
       // Find the most recent active conversation for this user-assistant combination
