@@ -123,8 +123,9 @@ export class ConversationDbService {
 
       this.logger.log(`🔍 [CONVERSATION DB] Raw response from User Service:`, response);
 
-      if (!response.success) {
-        const errorMessage = response.message || response.error || 'Unknown error occurred';
+      if (!response?.success) {
+        const errorMessage =
+          response?.userMessage || response?.developerMessage || response?.message || response?.error || 'Unknown error occurred';
         throw new Error(`Failed to start conversation: ${errorMessage}`);
       }
 
@@ -246,8 +247,10 @@ export class ConversationDbService {
         }),
       );
 
-      if (!response.success) {
-        throw new Error(`Failed to get messages: ${response.message}`);
+      if (!response?.success) {
+        const err =
+          response?.userMessage || response?.developerMessage || response?.message || response?.error || 'Unknown error';
+        throw new Error(`Failed to get messages: ${err}`);
       }
 
       this.logger.log(`✅ [CONVERSATION DB] Messages retrieved successfully:`, {
@@ -283,8 +286,10 @@ export class ConversationDbService {
         }),
       );
 
-      if (!response.success) {
-        throw new Error(`Failed to get conversations: ${response.message}`);
+      if (!response?.success) {
+        const err =
+          response?.userMessage || response?.developerMessage || response?.message || response?.error || 'Unknown error';
+        throw new Error(`Failed to get conversations: ${err}`);
       }
 
       this.logger.log(`✅ [CONVERSATION DB] Conversations retrieved successfully:`, {
@@ -321,8 +326,10 @@ export class ConversationDbService {
         }),
       );
 
-      if (!response.success) {
-        throw new Error(`Failed to get ${type} conversations: ${response.message}`);
+      if (!response?.success) {
+        const err =
+          response?.userMessage || response?.developerMessage || response?.message || response?.error || 'Unknown error';
+        throw new Error(`Failed to get ${type} conversations: ${err}`);
       }
 
       this.logger.log(`✅ [CONVERSATION DB] ${type} conversations retrieved successfully:`, {

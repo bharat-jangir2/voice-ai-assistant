@@ -1,5 +1,6 @@
 import { Controller, Logger, Inject, Get, Query } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
+import { Observable } from 'rxjs';
 import { DirectAIService } from '../services/direct-ai.service';
 import { ConversationDbService } from '../services/conversation-db.service';
 import { KnowledgeBaseSearchService } from '../services/knowledge-base-search.service';
@@ -324,6 +325,41 @@ export class ChatMicroserviceController {
     }
   }
 
+  // Microservice: End a chat session by conversationId
+  @MessagePattern('chat:end-session')
+  async msEndSession(@Payload() payload: { sessionId: string; reason?: string; headers?: any; requestedUser?: any }) {
+    try {
+      const { sessionId, reason } = payload || ({} as any);
+      if (!sessionId) {
+        return this.errorResponse('sessionId is required', 'SESSION_ID_REQUIRED');
+      }
+
+      const ended = await this.conversationDbService.endConversation({
+        conversationId: sessionId,
+        endedReason: reason || 'user-ended',
+      });
+
+      return {
+        success: true,
+        statusCode: 200,
+        userMessage: 'Session ended successfully',
+        userMessageCode: 'SESSION_ENDED_SUCCESS',
+        developerMessage: 'Conversation ended',
+        data: {
+          result: {
+            conversationId: ended._id,
+            status: ended.status,
+            endedAt: ended.endedAt,
+            duration: ended.duration,
+          },
+        },
+      };
+    } catch (error) {
+      this.logger.error('Failed to end session', error);
+      return this.errorResponse('Failed to end session', 'SESSION_END_FAILED');
+    }
+  }
+
   /**
    * Handle message request - combines session creation and messaging
    */
@@ -503,6 +539,65 @@ export class ChatMicroserviceController {
       this.logger.error('Message processing failed', error);
       return this.errorResponse(error.message, 'PROCESSING_FAILED');
     }
+  }
+
+  // Streaming variant: emits VAPI-style delta events as Observable
+  @MessagePattern('chat:message-stream')
+  streamMessage(@Payload() payload: ChatPayload): Observable<any> {
+    const startTime = Date.now();
+    const self = this;
+    return new Observable<any>((observer) => {
+      (async () => {
+        try {
+          const { chatMessageDto } = payload;
+          const { assistantId, message, userId, organizationId } = chatMessageDto;
+
+          // 1) Get or create session
+          const session = await self.getOrCreateSession({ userId, assistantId, organizationId });
+
+          // 2) Emit session id meta (optional) in generic structure path
+          observer.next({ id: session.id, path: 'data.result.sessionId', delta: session.id, done: false });
+
+          // 3) Get assistant config and credentials
+          const assistantConfig = await self.getAssistantConfiguration(assistantId, organizationId, userId);
+          let credentials = await self.getCredentialsForAssistant(assistantConfig, userId, organizationId);
+          if (!self.hasValidCredentials(credentials)) {
+            credentials = self.getSystemCredentials();
+          }
+
+          // 4) Store user message
+          if (message) {
+            await self.storeMessage(session.id, 'user', message);
+          }
+
+          // 5) Build context and get full AI response (simulate token streaming)
+          const context = await self.buildContext(session.id, assistantConfig.modelConfig?.maxTokens || 4000);
+          const ai = await self.getAIResponse(message || '', context, assistantConfig, credentials);
+
+          // 6) Stream chunks
+          const contentPath = 'data.result.content';
+          const text = ai.content || '';
+          const chunks = (text || '').match(/\S+|\s+|[\.!?]/g) || [text];
+          for (const chunk of chunks) {
+            observer.next({ id: session.id, path: contentPath, delta: chunk, done: false });
+          }
+          // finalize
+          observer.next({ id: session.id, path: contentPath, delta: '', done: true });
+
+          // 7) Persist assistant message with metrics
+          await self.storeMessage(session.id, 'assistant', ai.content, {
+            cost: ai.cost,
+            tokens: ai.tokens,
+            model: ai.model,
+            processingTime: Date.now() - startTime,
+          });
+
+          observer.complete();
+        } catch (err) {
+          observer.error({ error: true, message: err?.message || 'STREAM_FAILED' });
+        }
+      })();
+    });
   }
 
   // Helper methods for the refactored processMessage
