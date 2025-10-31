@@ -236,16 +236,40 @@ User: ${question}`;
       }
 
       // Use dynamic credentials if provided, otherwise use default AI provider
+      // For testing: AI_PROVIDER env var takes precedence over user credentials
       let aiProvider = this.aiProvider;
 
-      if (userCredentials) {
-        // Check which provider credentials are available and use them
+      // Check if AI_PROVIDER is set in environment (for testing purposes)
+      const preferredProvider = this.configService.get('AI_PROVIDER')?.toUpperCase();
+      this.logger.debug(`🔍 AI_PROVIDER environment variable: ${preferredProvider}`);
+
+      if (preferredProvider) {
+        // For testing: Use system credentials from AI_PROVIDER, ignore user credentials
+        if (preferredProvider === 'GOOGLE') {
+          const googleApiKey = this.configService.get('GOOGLE_API_KEY');
+          if (googleApiKey) {
+            aiProvider = new GoogleGeminiProvider(googleApiKey);
+            this.logger.log(`🔑 Using Google AI credentials from environment (AI_PROVIDER=GOOGLE)`);
+          } else {
+            this.logger.warn(`⚠️ AI_PROVIDER=GOOGLE but GOOGLE_API_KEY not found, falling back to default`);
+          }
+        } else if (preferredProvider === 'OPENAI') {
+          const openaiApiKey = this.configService.get('OPENAI_API_KEY');
+          if (openaiApiKey) {
+            aiProvider = new OpenAIProvider(openaiApiKey);
+            this.logger.log(`🔑 Using OpenAI credentials from environment (AI_PROVIDER=OPENAI)`);
+          } else {
+            this.logger.warn(`⚠️ AI_PROVIDER=OPENAI but OPENAI_API_KEY not found, falling back to default`);
+          }
+        }
+      } else if (userCredentials) {
+        // If AI_PROVIDER not set, check user credentials (backward compatibility)
         if (userCredentials.openaiApiKey) {
           aiProvider = new OpenAIProvider(userCredentials.openaiApiKey);
-          this.logger.log(`🔑 Using OpenAI credentials`);
+          this.logger.log(`🔑 Using OpenAI credentials from user/org credentials`);
         } else if (userCredentials.googleApiKey) {
           aiProvider = new GoogleGeminiProvider(userCredentials.googleApiKey);
-          this.logger.log(`🔑 Using Google AI credentials`);
+          this.logger.log(`🔑 Using Google AI credentials from user/org credentials`);
         } else {
           this.logger.log(`🔑 No valid user credentials found, using default provider`);
         }

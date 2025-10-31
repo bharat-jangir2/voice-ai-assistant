@@ -6,6 +6,13 @@ import { GoogleCloudService } from './google-cloud.service';
 /**
  * Unified speech service that can switch between different providers
  * Supports ElevenLabs and Google Cloud for both text-to-speech and speech-to-text
+ * 
+ * IMPORTANT: This service uses SYSTEM CREDENTIALS (environment variables),
+ * NOT per-assistant configuration. For testing purposes, we use:
+ * - STT_PROVIDER environment variable for Speech-to-Text
+ * - TTS_PROVIDER environment variable for Text-to-Speech
+ * 
+ * Assistant voice/transcriber config is NOT used here.
  */
 @Injectable()
 export class SpeechService {
@@ -19,11 +26,15 @@ export class SpeechService {
     private readonly elevenLabsService: ElevenLabsService,
     private readonly googleCloudService: GoogleCloudService,
   ) {
-    // Determine which service to use (default to ElevenLabs)
+    // For testing: Use SYSTEM CREDENTIALS from environment variables
+    // This ensures we use our custom credentials, NOT assistant config
     this.STT_PROVIDER = this.configService.get('STT_PROVIDER') || 'google-cloud';
     this.TTS_PROVIDER = this.configService.get('TTS_PROVIDER') || 'google-cloud';
     this.logger.debug(
       `Speech service initialized. Using: ${this.TTS_PROVIDER} for text-to-speech and ${this.STT_PROVIDER} for speech-to-text`,
+    );
+    this.logger.debug(
+      `⚠️ STT/TTS providers are from ENVIRONMENT VARIABLES (system credentials), NOT from assistant config`,
     );
   }
 

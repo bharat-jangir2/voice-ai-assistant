@@ -5,6 +5,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import * as http from 'http';
 import { Server } from 'socket.io';
 import { ChatGateway } from './twilio/gateway/chat.gateway';
+import { WebVoiceGateway } from './twilio/gateway/web-voice.gateway';
 
 async function bootstrap() {
   // Create a logger instance for the main application
@@ -48,6 +49,8 @@ async function bootstrap() {
   // Get ChatGateway from NestJS container and initialize handlers
   const chatGateway = app.get(ChatGateway);
   chatGateway.initialize(io);
+  const webVoiceGateway = app.get(WebVoiceGateway);
+  webVoiceGateway.initialize(io);
 
   // Start Socket.IO server on port 3002
   const socketPort = 3002;

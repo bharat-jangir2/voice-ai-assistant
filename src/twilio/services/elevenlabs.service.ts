@@ -93,7 +93,9 @@ export class ElevenLabsService {
 
   async transcribe(audioBuffer: Buffer): Promise<string> {
     try {
+      this.logger.log(`🎤 ElevenLabs STT: Received ${audioBuffer.length} bytes of audio`);
       const wavBuffer = this.writeMuLawToWavBuffer(audioBuffer);
+      this.logger.log(`🎤 ElevenLabs STT: Created WAV buffer: ${wavBuffer.length} bytes`);
 
       // Construct the main parameter object for the SDK's convert method
       const params = {
@@ -105,13 +107,18 @@ export class ElevenLabsService {
         // diarize: true,
       };
 
+      this.logger.log(`🎤 ElevenLabs STT: Calling API with ${wavBuffer.length} byte WAV file...`);
       const transcriptionResult = await this.client.speechToText.convert(params);
 
+      this.logger.log(`🎤 ElevenLabs STT: API response:`, JSON.stringify(transcriptionResult, null, 2));
+
       if (transcriptionResult && typeof transcriptionResult.text === 'string') {
-        return transcriptionResult.text;
+        const text = transcriptionResult.text.trim();
+        this.logger.log(`✅ ElevenLabs STT: Transcription: "${text}"`);
+        return text;
       } else {
-        this.logger.error('ElevenLabs SDK STT response did not contain text or was not as expected:', transcriptionResult);
-        throw new Error('ElevenLabs transcription failed: Invalid response structure from SDK.');
+        this.logger.warn(`⚠️ ElevenLabs STT: Response did not contain text. Full response:`, JSON.stringify(transcriptionResult, null, 2));
+        return '';
       }
     } catch (error) {
       let errorMessage = error.message;
@@ -123,8 +130,10 @@ export class ElevenLabsService {
       } else if (error.status && error.message) {
         errorMessage = `ElevenLabs API Error (${error.status}): ${error.message}`;
       }
-      this.logger.error(`Error transcribing audio with ElevenLabs SDK: ${errorMessage}`, error.stack);
-      throw new Error(`ElevenLabs transcription failed: ${errorMessage}`);
+      this.logger.error(`❌ Error transcribing audio with ElevenLabs SDK: ${errorMessage}`, error.stack);
+      this.logger.error(`❌ Error details:`, error);
+      // Return empty string instead of throwing to allow fallback
+      return '';
     }
   }
 }

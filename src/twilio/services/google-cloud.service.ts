@@ -131,8 +131,14 @@ export class GoogleCloudService {
   // Converts text to speech using Google Cloud TTS and returns mu-law audio buffer
   async createAudioFileFromText(text: string, voiceName?: string): Promise<Buffer> {
     try {
-      if (this.TTS_PROVIDER !== 'google-cloud') {
-        throw new Error('Google Cloud service is disabled');
+      // Allow TTS even if not primary TTS provider (for fallback scenarios)
+      if (!this.textToSpeechClient) {
+        // Try to initialize if not already initialized (for fallback)
+        try {
+          this.initializeGoogleCloudClients();
+        } catch (e) {
+          throw new Error(`Google Cloud service is disabled: ${e.message}`);
+        }
       }
 
       const defaultVoice = this.configService.get('GOOGLE_TTS_VOICE') || 'en-US-Neural2-A';
@@ -183,8 +189,14 @@ export class GoogleCloudService {
   // Converts speech to text using Google Cloud STT with phone call optimization
   async transcribe(audioBuffer: Buffer, languageCode: string = 'en-US'): Promise<string> {
     try {
-      if (this.STT_PROVIDER !== 'google-cloud') {
-        throw new Error('Google Cloud service is disabled');
+      // Allow transcription even if not primary STT provider (for fallback scenarios)
+      if (!this.speechClient) {
+        // Try to initialize if not already initialized (for fallback)
+        try {
+          this.initializeGoogleCloudClients();
+        } catch (e) {
+          throw new Error(`Google Cloud service is disabled: ${e.message}`);
+        }
       }
 
       // Convert mu-law to WAV for better compatibility

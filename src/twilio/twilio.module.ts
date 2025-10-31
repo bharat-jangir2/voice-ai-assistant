@@ -8,6 +8,9 @@ import { ConversationLogController } from './controllers/conversation-log.contro
 import { EmbeddingController } from './controllers/embedding.controller';
 import { QdrantController } from './controllers/qdrant.controller';
 import { TwilioController } from './controllers/twilio.controller';
+import { WebCallController } from './controllers/webcall.controller';
+import { WebVoiceGateway } from './gateway/web-voice.gateway';
+import { VoiceOrchestratorService } from './services/voice-orchestrator.service';
 import { TwilioGateway } from './gateway/twilio.gateway';
 import { ChatGateway } from './gateway/chat.gateway';
 import { AIResponseService } from './services/ai-response.service';
@@ -40,6 +43,7 @@ import { SemanticSearchService } from './services/semantic-search.service';
 import { FileExtractionService } from './services/file-extraction.service';
 import { CostCalculationService } from './services/cost-calculation.service';
 import { KnowledgeBaseEmbeddingController } from './controllers/knowledge-base-embedding.controller';
+import { AudioFormatService } from './services/audio-format.service';
 
 @Module({
   imports: [
@@ -68,10 +72,13 @@ import { KnowledgeBaseEmbeddingController } from './controllers/knowledge-base-e
     ConversationLogController,
     EmbeddingController,
     KnowledgeBaseEmbeddingController,
+    WebCallController,
   ],
   providers: [
     TwilioGateway,
     ChatGateway,
+    WebVoiceGateway,
+    VoiceOrchestratorService,
     WhisperService,
     ElevenLabsService,
     AudioProcessingService,
@@ -101,6 +108,7 @@ import { KnowledgeBaseEmbeddingController } from './controllers/knowledge-base-e
     SemanticSearchService,
     FileExtractionService,
     CostCalculationService,
+    AudioFormatService,
   ],
   exports: [RedisService, ChromaDBService, QdrantDBService, ConversationLoggerService, EmailService, SpeechService],
 })
