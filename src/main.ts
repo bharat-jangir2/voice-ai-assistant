@@ -36,7 +36,7 @@ async function bootstrap() {
   // Start listening for incoming connections
   await app.listen();
 
-  // Create separate HTTP server for Socket.IO on port 3002
+  // Create separate HTTP server for Socket.IO on port 5001
   const socketServer = http.createServer();
   const io = new Server(socketServer, {
     cors: {
@@ -52,8 +52,8 @@ async function bootstrap() {
   const webVoiceGateway = app.get(WebVoiceGateway);
   webVoiceGateway.initialize(io);
 
-  // Start Socket.IO server on port 3002
-  const socketPort = 3002;
+  // Start Socket.IO server on port 5001
+  const socketPort = 5001;
   socketServer.listen(socketPort, '0.0.0.0', () => {
     console.log(`🚀 Socket.IO server is running on port ${socketPort}`);
   });
