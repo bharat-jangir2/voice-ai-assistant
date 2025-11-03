@@ -313,8 +313,9 @@ export class ConversationDbService {
     type: 'chat' | 'phoneCall' | 'webCall' | 'sms',
     page: number = 1,
     limit: number = 50,
+    includeCosts: boolean = false,
   ): Promise<{ conversations: ConversationEntity[]; total: number }> {
-    this.logger.log(`🚀 [CONVERSATION DB] Getting ${type} conversations for organization: ${organizationId}`);
+    this.logger.log(`🚀 [CONVERSATION DB] Getting ${type} conversations for organization: ${organizationId} (includeCosts: ${includeCosts})`);
 
     try {
       const response = await firstValueFrom(
@@ -323,6 +324,7 @@ export class ConversationDbService {
           type,
           page,
           limit,
+          includeCosts, // Pass flag to use aggregation with costs
         }),
       );
 

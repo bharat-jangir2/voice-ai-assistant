@@ -85,23 +85,47 @@ export class ChatMicroserviceController {
       // If a specific chat is requested
       if (chatId) {
         const conv = await this.conversationDbService.getConversation(chatId);
-        const single = conv
-          ? [
-              {
-                _id: conv._id,
-                organizationId: conv.organizationId,
-                assistantId: conv.assistantId,
-                userId: conv.userId,
-                type: conv.type,
-                direction: conv.direction,
-                status: conv.status,
-                stream: conv.stream,
-                startedAt: conv.startedAt,
-                lastActivityAt: conv.lastActivityAt,
-                messageCount: conv?.conversationMetrics?.totalMessages ?? 0,
-              },
-            ]
-          : [];
+        // Only return if it's a 'chat' type conversation
+        let calculatedCost = 0;
+
+        if (conv && conv.type === 'chat') {
+          try {
+            // Calculate cost from messages (more accurate than stored value)
+            const costResponse: any = await firstValueFrom(
+              this.userServiceClient.send('conversation:calculate-cost', {
+                conversationId: chatId,
+              }),
+            );
+            if (costResponse?.success && costResponse?.data?.cost !== undefined) {
+              calculatedCost = costResponse.data.cost;
+            } else {
+              calculatedCost = parseFloat(Number(conv?.cost || 0).toFixed(4));
+            }
+          } catch (error) {
+            this.logger.warn('Failed to calculate cost from messages, using stored value:', error);
+            calculatedCost = parseFloat(Number(conv?.cost || 0).toFixed(4));
+          }
+        }
+
+        const single =
+          conv && conv.type === 'chat'
+            ? [
+                {
+                  _id: conv._id,
+                  organizationId: conv.organizationId,
+                  assistantId: conv.assistantId,
+                  userId: conv.userId,
+                  type: conv.type,
+                  direction: conv.direction,
+                  status: conv.status,
+                  stream: conv.stream,
+                  startedAt: conv.startedAt,
+                  lastActivityAt: conv.lastActivityAt,
+                  messageCount: conv?.conversationMetrics?.totalMessages ?? 0,
+                  cost: calculatedCost, // Total cost calculated from all messages (4 decimal places)
+                },
+              ]
+            : [];
 
         return {
           success: true,
@@ -122,8 +146,16 @@ export class ChatMicroserviceController {
         };
       }
 
-      const { conversations, total } = await this.conversationDbService.getConversations(orgId, pageNum, limitNum);
+      // Get only 'chat' type conversations for chat logs API with costs calculated via aggregation
+      const { conversations, total } = await this.conversationDbService.getConversationsByType(
+        orgId,
+        'chat',
+        pageNum,
+        limitNum,
+        true,
+      );
 
+      // Costs are already calculated in the aggregation pipeline, use calculatedCost field
       let items = (conversations || []).map((c: any) => ({
         _id: c._id,
         organizationId: c.organizationId,
@@ -136,6 +168,7 @@ export class ChatMicroserviceController {
         startedAt: c.startedAt,
         lastActivityAt: c.lastActivityAt,
         messageCount: c?.conversationMetrics?.totalMessages ?? 0,
+        cost: parseFloat(Number((c?.calculatedCost ?? c?.cost) || 0).toFixed(4)), // Use calculated cost from aggregation (4 decimal places)
       }));
 
       if (assistantId) {
@@ -501,9 +534,15 @@ export class ChatMicroserviceController {
           `💰 KB Cost breakdown: Embedding: $${kbCostBreakdown.breakdown.embeddingCost.toFixed(6)}, Search: $${kbCostBreakdown.breakdown.searchCost.toFixed(6)}, AI: $${kbCostBreakdown.breakdown.aiCost.toFixed(6)}, Total: $${kbCostBreakdown.amount.toFixed(6)}`,
         );
 
+        // Format cost to 4 decimal places before storing
+        const formattedKbCost = {
+          ...kbCostBreakdown,
+          amount: parseFloat(Number(kbCostBreakdown.amount || 0).toFixed(4)),
+        };
+
         // Store KB response with cost breakdown
         await this.storeMessage(session.id, 'assistant', knowledgeBaseResponse.content, {
-          cost: kbCostBreakdown,
+          cost: formattedKbCost,
           tokens: kbResponseMetadata.fallbackAITokens || {
             prompt: 0,
             completion: 0,
@@ -894,7 +933,7 @@ export class ChatMicroserviceController {
     return {
       content: aiResponse.content,
       cost: {
-        amount: costBreakdown.totalCost.amount,
+        amount: parseFloat(Number(costBreakdown.totalCost.amount || 0).toFixed(4)), // Format to 4 decimal places
         currency: costBreakdown.totalCost.currency,
         service: 'llm',
         modelCost: costBreakdown.modelCost.amount,

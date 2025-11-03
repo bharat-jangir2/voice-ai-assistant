@@ -368,7 +368,13 @@ export class VoiceOrchestratorService {
         },
         provider,
       );
-      msgCost = costBreakdown?.totalCost;
+      // Format cost to 4 decimal places before storing
+      if (costBreakdown?.totalCost) {
+        msgCost = {
+          ...costBreakdown.totalCost,
+          amount: parseFloat(Number(costBreakdown.totalCost.amount || 0).toFixed(4)),
+        };
+      }
     }
 
     await this.conversationDbService.sendMessage({
@@ -575,7 +581,13 @@ export class VoiceOrchestratorService {
         },
         provider,
       );
-      msgCost = costBreakdown?.totalCost;
+      // Format cost to 4 decimal places before storing
+      if (costBreakdown?.totalCost) {
+        msgCost = {
+          ...costBreakdown.totalCost,
+          amount: parseFloat(Number(costBreakdown.totalCost.amount || 0).toFixed(4)),
+        };
+      }
     }
 
     await this.conversationDbService.sendMessage({
