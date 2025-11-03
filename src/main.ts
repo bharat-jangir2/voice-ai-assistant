@@ -11,8 +11,8 @@ async function bootstrap() {
   // Create a logger instance for the main application
   const logger = new Logger('Main');
 
-  // Set the port from environment variable or default to 3001
-  const port = parseInt(process.env.PORT || '3001');
+  // Set the port from environment variable or default to 9002
+  const port = parseInt(process.env.PORT || '9002');
 
   // Set the host from environment variable or default to '0.0.0.0'
   const host = process.env.HOST || '0.0.0.0';
