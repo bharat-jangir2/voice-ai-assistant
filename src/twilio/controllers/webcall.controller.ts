@@ -43,9 +43,9 @@ export class WebCallController {
         metadata: metadata || {},
       });
 
-      // Socket.IO server URL (running on port 3002 with /voice namespace)
-      // Use environment variable or default to localhost:3002/voice
-      const socketPort = process.env.SOCKET_IO_PORT || '3002';
+      // Socket.IO server URL (running on port 5001 with /voice namespace)
+      // Use environment variable or default to localhost:5001/voice
+      const socketPort = process.env.SOCKET_IO_PORT || '5001';
       const socketHost = process.env.SOCKET_IO_HOST || 'localhost';
       const protocol = process.env.SOCKET_IO_PROTOCOL || 'http';
       const wsUrl = process.env.WEB_VOICE_WS_URL || `${protocol}://${socketHost}:${socketPort}/voice`;
