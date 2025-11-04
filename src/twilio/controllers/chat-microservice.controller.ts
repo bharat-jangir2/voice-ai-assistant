@@ -594,8 +594,17 @@ export class ChatMicroserviceController {
           // 1) Get or create session
           const session = await self.getOrCreateSession({ userId, assistantId, organizationId });
 
-          // 2) Emit session id meta (optional) in generic structure path
-          observer.next({ id: session.id, path: 'data.result.sessionId', delta: session.id, done: false });
+          // 2) Emit session id in REST API format
+          observer.next({
+            logId: '',
+            statusCode: 200,
+            success: true,
+            userMessage: null,
+            userMessageCode: null,
+            developerMessage: 'Session created',
+            data: { result: { sessionId: session.id, content: '' } },
+            done: false,
+          });
 
           // 3) Get assistant config and credentials
           const assistantConfig = await self.getAssistantConfiguration(assistantId, organizationId, userId);
@@ -618,10 +627,29 @@ export class ChatMicroserviceController {
           const text = ai.content || '';
           const chunks = (text || '').match(/\S+|\s+|[\.!?]/g) || [text];
           for (const chunk of chunks) {
-            observer.next({ id: session.id, path: contentPath, delta: chunk, done: false });
+            // observer.next({ id: session.id, path: contentPath, delta: chunk, done: false });
+            observer.next({
+              logId: '',
+              statusCode: 200,
+              success: true,
+              userMessage: null,
+              userMessageCode: null,
+              developerMessage: 'Streaming token chunk',
+              data: { result: { sessionId: session.id, content: chunk } },
+              done: false,
+            });
           }
           // finalize
-          observer.next({ id: session.id, path: contentPath, delta: '', done: true });
+          observer.next({
+            logId: '',
+            statusCode: 200,
+            success: true,
+            userMessage: null,
+            userMessageCode: null,
+            developerMessage: 'Streaming token last chunk',
+            data: { result: { sessionId: session.id, content: '' } },
+            done: true,
+          });
 
           // 7) Persist assistant message with metrics
           await self.storeMessage(session.id, 'assistant', ai.content, {
