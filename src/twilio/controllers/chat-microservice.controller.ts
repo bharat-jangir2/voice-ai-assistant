@@ -389,6 +389,26 @@ export class ChatMicroserviceController {
       };
     } catch (error) {
       this.logger.error('Failed to end session', error);
+
+      // Check if error indicates conversation not found (404)
+      const isNotFound =
+        (error as any)?.statusCode === 404 ||
+        (error as any)?.isNotFound === true ||
+        error?.message?.includes('not found') ||
+        error?.message?.includes('Conversation not found') ||
+        error?.message?.includes('already ended');
+
+      if (isNotFound) {
+        return {
+          success: false,
+          statusCode: 404,
+          userMessage: 'Chat session not found or already ended',
+          userMessageCode: 'CHAT_SESSION_NOT_FOUND',
+          developerMessage: error?.message || 'Conversation not found or already ended',
+          data: { result: null },
+        };
+      }
+
       return this.errorResponse('Failed to end session', 'SESSION_END_FAILED');
     }
   }

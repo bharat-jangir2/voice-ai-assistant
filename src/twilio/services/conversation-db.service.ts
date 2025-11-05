@@ -190,7 +190,11 @@ export class ConversationDbService {
       const response = await firstValueFrom(this.userServiceClient.send('conversation:end', { endConversationDto }));
 
       if (!response.success) {
-        throw new Error(`Failed to end conversation: ${response.message}`);
+        // Preserve 404 status code if conversation not found
+        const error = new Error(`Failed to end conversation: ${response.message}`);
+        (error as any).statusCode = response.statusCode || 400;
+        (error as any).isNotFound = response.statusCode === 404;
+        throw error;
       }
 
       this.logger.log(`✅ [CONVERSATION DB] Conversation ended successfully:`, {

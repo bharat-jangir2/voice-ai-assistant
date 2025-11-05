@@ -113,6 +113,26 @@ export class WebCallController {
       };
     } catch (error) {
       this.logger.error('Failed to end web voice session', error);
+
+      // Check if error indicates conversation not found (404)
+      const isNotFound =
+        (error as any)?.statusCode === 404 ||
+        (error as any)?.isNotFound === true ||
+        error?.message?.includes('not found') ||
+        error?.message?.includes('Conversation not found') ||
+        error?.message?.includes('already ended');
+
+      if (isNotFound) {
+        return {
+          success: false,
+          statusCode: 404,
+          userMessage: 'Voice session not found or already ended',
+          userMessageCode: 'VOICE_SESSION_NOT_FOUND',
+          developerMessage: error?.message || 'Conversation not found or already ended',
+          data: { result: null },
+        };
+      }
+
       return {
         success: false,
         statusCode: 400,
