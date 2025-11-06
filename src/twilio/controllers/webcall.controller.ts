@@ -1,12 +1,16 @@
 import { Controller, Logger } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { ConversationDbService } from '../services/conversation-db.service';
+import { AssistantConfigCacheService } from '../services/assistant-config-cache.service';
 
 @Controller()
 export class WebCallController {
   private readonly logger = new Logger(WebCallController.name);
 
-  constructor(private readonly conversationDbService: ConversationDbService) {}
+  constructor(
+    private readonly conversationDbService: ConversationDbService,
+    private readonly assistantConfigCache: AssistantConfigCacheService,
+  ) {}
 
   // Start a web voice session (creates a 'webCall' conversation)
   @MessagePattern('voice:start')
@@ -139,6 +143,59 @@ export class WebCallController {
         userMessage: 'Failed to end web voice session',
         userMessageCode: 'VOICE_END_FAILED',
         developerMessage: error?.message || 'VOICE_END_FAILED',
+        data: { result: null },
+      };
+    }
+  }
+
+  // Invalidate assistant config cache when assistant is updated
+  @MessagePattern('assistant:invalidate-cache')
+  async invalidateAssistantCache(
+    @Payload()
+    payload: {
+      assistantId: string;
+      organizationId?: string;
+      userId?: string;
+    },
+  ) {
+    try {
+      const { assistantId, organizationId, userId } = payload || {};
+      if (!assistantId) {
+        return {
+          success: false,
+          statusCode: 400,
+          userMessage: 'assistantId is required',
+          userMessageCode: 'ASSISTANT_ID_REQUIRED',
+          developerMessage: 'assistantId is required for cache invalidation',
+          data: { result: null },
+        };
+      }
+
+      // Invalidate cache for this assistant
+      this.assistantConfigCache.invalidateAssistant(assistantId, organizationId, userId);
+      this.logger.log(`🗑️ Invalidated cache for assistant ${assistantId}`);
+
+      return {
+        success: true,
+        statusCode: 200,
+        userMessage: 'Assistant cache invalidated successfully',
+        userMessageCode: 'CACHE_INVALIDATED_SUCCESS',
+        developerMessage: 'Cache invalidated',
+        data: {
+          result: {
+            assistantId,
+            invalidated: true,
+          },
+        },
+      };
+    } catch (error) {
+      this.logger.error('Failed to invalidate assistant cache', error);
+      return {
+        success: false,
+        statusCode: 400,
+        userMessage: 'Failed to invalidate assistant cache',
+        userMessageCode: 'CACHE_INVALIDATION_FAILED',
+        developerMessage: error?.message || 'CACHE_INVALIDATION_FAILED',
         data: { result: null },
       };
     }

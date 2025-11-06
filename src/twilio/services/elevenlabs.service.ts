@@ -29,7 +29,7 @@ export class ElevenLabsService {
     if (!modelId) {
       throw new Error('ELEVENLABS_MODEL_ID is not defined');
     }
-    const outputFormat = 'ulaw_8000'
+    const outputFormat = 'ulaw_8000';
     try {
       const muLawStream: Readable = await this.client.textToSpeech.convert(voiceId, {
         model_id: modelId,
@@ -94,45 +94,36 @@ export class ElevenLabsService {
   async transcribe(audioBuffer: Buffer): Promise<string> {
     try {
       this.logger.log(`🎤 ElevenLabs STT: Received ${audioBuffer.length} bytes of audio`);
+
       const wavBuffer = this.writeMuLawToWavBuffer(audioBuffer);
       this.logger.log(`🎤 ElevenLabs STT: Created WAV buffer: ${wavBuffer.length} bytes`);
 
-      // Construct the main parameter object for the SDK's convert method
-      const params = {
-        file: new Blob([wavBuffer], { type: 'audio/wav' }), // Create a Blob
+      // Use dynamic import for File in Node.js environment
+      const { File } = await import('buffer');
+
+      // Create File object directly from buffer (no temp file needed)
+      // Cast to any to avoid type mismatch between Node.js File and DOM File
+      const file = new File([wavBuffer], 'audio.wav', { type: 'audio/wav' }) as any;
+
+      this.logger.log(`📤 Calling ElevenLabs STT API with ${wavBuffer.length} bytes...`);
+
+      const transcriptionResult = await this.client.speechToText.convert({
+        file: file,
         model_id: 'scribe_v1',
-        // Optional parameters from the API documentation:
         language_code: 'en',
-        tag_audio_events: false,
-        // diarize: true,
-      };
+      });
 
-      this.logger.log(`🎤 ElevenLabs STT: Calling API with ${wavBuffer.length} byte WAV file...`);
-      const transcriptionResult = await this.client.speechToText.convert(params);
+      const text = transcriptionResult?.text?.trim() || '';
 
-      this.logger.log(`🎤 ElevenLabs STT: API response:`, JSON.stringify(transcriptionResult, null, 2));
-
-      if (transcriptionResult && typeof transcriptionResult.text === 'string') {
-        const text = transcriptionResult.text.trim();
+      if (text) {
         this.logger.log(`✅ ElevenLabs STT: Transcription: "${text}"`);
-        return text;
       } else {
-        this.logger.warn(`⚠️ ElevenLabs STT: Response did not contain text. Full response:`, JSON.stringify(transcriptionResult, null, 2));
-        return '';
+        this.logger.warn(`⚠️ ElevenLabs STT: Empty transcription received`);
       }
+
+      return text;
     } catch (error) {
-      let errorMessage = error.message;
-      // Check if it's an error from the ElevenLabs SDK (they might have custom error types or properties)
-      // For now, a generic check for status and body which are common in SDK-wrapped API errors.
-      if (error.status && error.body && error.body.detail) {
-        // Heuristic check for ElevenLabs like API error
-        errorMessage = `ElevenLabs API Error (${error.status}): ${error.message}. Detail: ${error.body.detail}`;
-      } else if (error.status && error.message) {
-        errorMessage = `ElevenLabs API Error (${error.status}): ${error.message}`;
-      }
-      this.logger.error(`❌ Error transcribing audio with ElevenLabs SDK: ${errorMessage}`, error.stack);
-      this.logger.error(`❌ Error details:`, error);
-      // Return empty string instead of throwing to allow fallback
+      this.logger.error(`❌ Error transcribing audio with ElevenLabs SDK: ${error.message}`);
       return '';
     }
   }

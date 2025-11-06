@@ -44,6 +44,9 @@ import { FileExtractionService } from './services/file-extraction.service';
 import { CostCalculationService } from './services/cost-calculation.service';
 import { KnowledgeBaseEmbeddingController } from './controllers/knowledge-base-embedding.controller';
 import { AudioFormatService } from './services/audio-format.service';
+import { VoiceActivityDetectorService } from './services/voice-activity-detector.service';
+import { StreamingSTTService } from './services/streaming-stt.service';
+import { AssistantConfigCacheService } from './services/assistant-config-cache.service';
 
 @Module({
   imports: [
@@ -109,6 +112,9 @@ import { AudioFormatService } from './services/audio-format.service';
     FileExtractionService,
     CostCalculationService,
     AudioFormatService,
+    VoiceActivityDetectorService,
+    StreamingSTTService,
+    AssistantConfigCacheService,
   ],
   exports: [RedisService, ChromaDBService, QdrantDBService, ConversationLoggerService, EmailService, SpeechService],
 })
