@@ -92,7 +92,7 @@ export class AudioFormatService {
     // Downsample if needed
     let processedSamples = samples;
     if (sourceSampleRate !== targetSampleRate) {
-      processedSamples = this.downsampleAudio(samples, sourceSampleRate, targetSampleRate);
+      processedSamples = this.downsampleAudio(samples, sourceSampleRate, targetSampleRate) as any;
     }
 
     // Convert to mu-law

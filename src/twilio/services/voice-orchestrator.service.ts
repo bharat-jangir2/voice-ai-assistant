@@ -27,6 +27,7 @@ export class VoiceOrchestratorService {
     minSilenceChunks: 10, // ~200ms of silence (reduced from 15 = 300ms)
     vadSilenceMs: 200, // Additional silence period (reduced from 600ms)
     silenceThreshold: 250, // Slightly lower threshold for better sensitivity (reduced from 300)
+    maxBufferChunks: 200, // Prevent memory leaks in long sessions
   };
 
   // PHASE 3: Enhanced interrupt detection configuration for faster, more responsive interrupts
@@ -35,6 +36,7 @@ export class VoiceOrchestratorService {
     instantInterruptChunks: 2, // Faster detection - only 2 chunks needed (was 3)
     playbackBufferMs: 100, // Reduced grace period after playback starts (was 500ms)
     interruptCooldownMs: 800, // Slightly reduced cooldown (was 1000ms)
+    exponentialDecayFactor: 0.9, // Smoother decay for interrupt detection
   };
 
   constructor(
@@ -78,33 +80,56 @@ export class VoiceOrchestratorService {
       this.logger.warn(`⚠️ Could not pre-cache assistant config for session ${sessionId}: ${(error as any)?.message}`);
     }
 
-    this.sessions.set(sessionId, {
+    // Use centralized session creation method
+    const session = this.createSession(sessionId, config, {
+      assistantConfig,
+      assistantId,
+      organizationId,
+      userId,
+    });
+
+    this.sessions.set(sessionId, session);
+  }
+
+  // Enhanced session interface - centralized session creation
+  private createSession(
+    sessionId: string,
+    config?: VoiceOrchestratorConfig,
+    metadata?: {
+      assistantConfig?: any;
+      assistantId?: string | null;
+      organizationId?: string | null;
+      userId?: string | null;
+    },
+  ): any {
+    return {
       buffers: [] as Buffer[],
       debounce: null as NodeJS.Timeout | null,
-      vadSilenceMs: config?.vadSilenceMs ?? this.QUICK_SILENCE_CONFIG.vadSilenceMs, // Optimized: 200ms (was 600ms)
-      audioFormat: 'pcm16' as 'pcm16' | 'mulaw', // Track audio format for this session
-      sampleRate: 16000, // Track sample rate for this session
-      // Silence detection state
-      silenceChunkCount: 0, // Count of consecutive silent chunks
-      activeChunkCount: 0, // Count of chunks with audio activity
-      lastAudioAmplitude: 0, // Last detected audio amplitude
-      // Interrupt detection state
-      isPlayingBack: false, // Flag to indicate if AI response is being played back
-      playbackStartTime: 0, // Timestamp when playback started
-      interruptThreshold: this.ENHANCED_INTERRUPT_CONFIG.quickInterruptThreshold, // PHASE 3: Enhanced threshold (500, was 1000)
-      interruptChunkCount: this.ENHANCED_INTERRUPT_CONFIG.instantInterruptChunks, // PHASE 3: Faster detection (2, was 3)
-      consecutiveInterruptChunks: 0, // Current count of consecutive interrupt chunks (can be fractional for gradual decay)
-      lastInterruptTime: 0, // Last time an interrupt was detected
-      playbackInterrupted: false, // Flag to track if current playback was interrupted
-      // VAD and streaming STT state
-      streamingSTT: null as any, // Reference to streaming STT session
-      lastVADResult: null as VADResult | null, // Last VAD analysis result
-      // Cached assistant config for this session (avoid repeated DB queries)
-      cachedAssistantConfig: assistantConfig as any | null,
-      assistantId: assistantId,
-      organizationId: organizationId,
-      userId: userId,
-    });
+      audioFormat: 'pcm16' as 'pcm16' | 'mulaw',
+      sampleRate: 16000,
+      // Speech state
+      silenceChunkCount: 0,
+      activeChunkCount: 0,
+      lastAudioAmplitude: 0,
+      lastIsSpeech: false, // Track speech transitions for better endpointing
+      // Playback state
+      isPlayingBack: false,
+      playbackStartTime: 0,
+      interruptThreshold: this.ENHANCED_INTERRUPT_CONFIG.quickInterruptThreshold,
+      interruptChunkCount: this.ENHANCED_INTERRUPT_CONFIG.instantInterruptChunks,
+      consecutiveInterruptChunks: 0,
+      lastInterruptTime: 0,
+      playbackInterrupted: false,
+      // STT state
+      streamingSTT: null as any,
+      lastVADResult: null as VADResult | null,
+      // Config
+      vadSilenceMs: config?.vadSilenceMs ?? this.QUICK_SILENCE_CONFIG.vadSilenceMs,
+      cachedAssistantConfig: metadata?.assistantConfig ?? null,
+      assistantId: metadata?.assistantId ?? null,
+      organizationId: metadata?.organizationId ?? null,
+      userId: metadata?.userId ?? null,
+    };
   }
 
   // Handle incoming audio chunk (PCM/Opus base64) with optional format metadata
@@ -131,25 +156,26 @@ export class VoiceOrchestratorService {
     s.lastVADResult = vadResult;
     s.lastAudioAmplitude = vadResult.amplitude;
 
-    // Check for interrupt during playback
-    if (s.isPlayingBack) {
-      await this.checkForInterrupt(sessionId, vadResult.amplitude);
-      // Still accumulate audio during interrupt (for processing after interrupt)
-      this.logger.debug(
-        `📥 Audio received during playback: amplitude=${vadResult.amplitude}, confidence=${vadResult.confidence.toFixed(2)}, interrupt chunks=${s.consecutiveInterruptChunks}`,
-      );
-    } else {
-      // PHASE 2: Use VAD-based speech/silence detection
-      if (vadResult.isSpeech) {
-        await this.handleSpeechChunk(sessionId, audioBuffer, vadResult);
-      } else {
-        await this.handleSilenceChunk(sessionId, audioBuffer, vadResult);
-      }
-    }
+    // Track speech transitions for better endpointing
+    const wasSpeech = s.lastIsSpeech;
+    s.lastIsSpeech = vadResult.isSpeech;
 
     this.logger.debug(
-      `📥 Received audio chunk for session ${sessionId}: ${audioBuffer.length} bytes (${s.audioFormat} ${s.sampleRate}Hz), VAD: speech=${vadResult.isSpeech}, confidence=${vadResult.confidence.toFixed(2)}, amplitude=${vadResult.amplitude.toFixed(0)}`,
+      `📥 Audio: ${audioBuffer.length} bytes, VAD: ${vadResult.isSpeech}, confidence: ${vadResult.confidence.toFixed(2)}`,
     );
+
+    // Check for interrupt during playback FIRST
+    if (s.isPlayingBack) {
+      await this.checkForInterrupt(sessionId, vadResult.amplitude);
+      return;
+    }
+
+    // Normal speech/silence processing
+    if (vadResult.isSpeech) {
+      await this.handleSpeechChunk(sessionId, audioBuffer, vadResult);
+    } else {
+      await this.handleSilenceChunk(sessionId, audioBuffer, vadResult, wasSpeech);
+    }
   }
 
   /**
@@ -160,7 +186,13 @@ export class VoiceOrchestratorService {
     const s = this.sessions.get(sessionId);
     if (!s) return;
 
-    // Reset silence counter
+    // Only process high-confidence speech
+    if (vadResult.confidence < 0.6) {
+      this.logger.debug(`⚠️ Low confidence speech: ${vadResult.confidence.toFixed(2)}`);
+      return;
+    }
+
+    // Reset silence counter and increment active counter
     s.silenceChunkCount = 0;
     s.activeChunkCount++;
 
@@ -170,17 +202,29 @@ export class VoiceOrchestratorService {
       s.debounce = null;
     }
 
-    // Add to buffer for STT
+    // Add to buffer with memory management
     s.buffers.push(audioBuffer);
 
-    // PHASE 2: Start streaming STT if not already started
+    // Prevent memory leaks in long sessions
+    if (s.buffers.length > this.QUICK_SILENCE_CONFIG.maxBufferChunks) {
+      const excess = s.buffers.length - this.QUICK_SILENCE_CONFIG.maxBufferChunks;
+      s.buffers = s.buffers.slice(excess);
+      this.logger.debug(`🗜️ Trimmed ${excess} buffers to prevent memory growth`);
+    }
+
+    // Start streaming STT if not already started
     if (!s.streamingSTT) {
       await this.startStreamingSTT(sessionId);
     }
 
-    // PHASE 2: Send to streaming STT for real-time transcription
+    // Send to streaming STT with error handling
     if (s.streamingSTT) {
-      await this.streamingSTTService.sendAudio(sessionId, audioBuffer);
+      try {
+        await this.streamingSTTService.sendAudio(sessionId, audioBuffer);
+      } catch (error) {
+        this.logger.error(`❌ Streaming STT error: ${error.message}`);
+        // Continue processing without STT
+      }
     }
   }
 
@@ -188,43 +232,39 @@ export class VoiceOrchestratorService {
    * Handle silence chunk (user is not speaking)
    * PHASE 2: VAD-based silence handling with intelligent finalization
    */
-  private async handleSilenceChunk(sessionId: string, audioBuffer: Buffer, vadResult: VADResult): Promise<void> {
+  private async handleSilenceChunk(
+    sessionId: string,
+    audioBuffer: Buffer,
+    vadResult: VADResult,
+    wasSpeech: boolean,
+  ): Promise<void> {
     const s = this.sessions.get(sessionId);
     if (!s) return;
 
     s.silenceChunkCount++;
+    s.buffers.push(audioBuffer); // Include silence for natural endpointing
 
-    // PHASE 2: Use VAD's shouldFinalize instead of fixed chunk counts
-    // VAD provides more accurate detection of speech end
+    // Adaptive finalization based on confidence
+    let finalizationDelay = s.vadSilenceMs;
+    if (vadResult.confidence < 0.7) {
+      finalizationDelay *= 1.5; // Extend for low confidence
+    }
+
+    // VAD-based finalization (preferred)
     if (vadResult.shouldFinalize && s.activeChunkCount >= 2) {
-      // User has spoken and VAD indicates speech has ended
-      if (!s.debounce) {
-        s.debounce = setTimeout(() => {
-          this.logger.log(
-            `⏰ VAD detected speech end for session ${sessionId}, finalizing utterance (${s.buffers.length} buffers, confidence=${vadResult.confidence.toFixed(2)})`,
-          );
-          s.debounce = null;
-          this.finalizeUtterance(sessionId).catch((e) => {
-            this.logger.error(`❌ Error finalizing utterance for session ${sessionId}: ${e.message}`);
-          });
-        }, 200); // Reduced from 600ms - VAD is more accurate
-      }
-    } else {
-      // Fallback to chunk-based detection if VAD doesn't indicate finalization
-      const minActiveChunks = this.QUICK_SILENCE_CONFIG.minActiveChunks;
-      const minSilenceChunks = this.QUICK_SILENCE_CONFIG.minSilenceChunks;
+      this.scheduleFinalization(sessionId, 'vad', finalizationDelay, vadResult.confidence);
+      return;
+    }
 
-      if (s.activeChunkCount >= minActiveChunks && s.silenceChunkCount >= minSilenceChunks) {
-        if (!s.debounce) {
-          s.debounce = setTimeout(() => {
-            this.logger.log(`⏰ Chunk-based silence detected for session ${sessionId}, finalizing utterance`);
-            s.debounce = null;
-            this.finalizeUtterance(sessionId).catch((e) => {
-              this.logger.error(`❌ Error finalizing utterance for session ${sessionId}: ${e.message}`);
-            });
-          }, s.vadSilenceMs);
-        }
-      }
+    // Speech-to-silence transition detection
+    if (wasSpeech && !vadResult.isSpeech) {
+      this.logger.debug(`🔄 Speech → Silence transition detected`);
+    }
+
+    // Fallback: Chunk-based finalization
+    const { minActiveChunks, minSilenceChunks } = this.QUICK_SILENCE_CONFIG;
+    if (s.activeChunkCount >= minActiveChunks && s.silenceChunkCount >= minSilenceChunks) {
+      this.scheduleFinalization(sessionId, 'chunk-based', finalizationDelay);
     }
   }
 
@@ -260,6 +300,36 @@ export class VoiceOrchestratorService {
     }
   }
 
+  private scheduleFinalization(sessionId: string, type: string, delayMs: number, confidence?: number): void {
+    const s = this.sessions.get(sessionId);
+    if (!s || s.debounce) return;
+
+    s.debounce = setTimeout(async () => {
+      // Clear immediately and validate session
+      s.debounce = null;
+
+      const currentSession = this.sessions.get(sessionId);
+      if (!currentSession) {
+        this.logger.warn(`Session ${sessionId} ended during finalization`);
+        return;
+      }
+
+      this.logger.log(
+        `⏰ ${type} finalization: ${currentSession.buffers.length} buffers` +
+          (confidence ? `, confidence: ${confidence.toFixed(2)}` : ''),
+      );
+      try {
+        await this.finalizeUtterance(sessionId);
+      } catch (error) {
+        this.logger.error(`❌ Finalization error: ${error.message}`);
+      }
+    }, delayMs);
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
   // Calculate audio amplitude from buffer (for silence/interrupt detection)
   private calculateAudioAmplitude(audioBuffer: Buffer, format: 'pcm16' | 'mulaw'): number {
     let sum = 0;
@@ -286,38 +356,31 @@ export class VoiceOrchestratorService {
     return count > 0 ? sum / count : 0;
   }
 
-  // PHASE 3: Enhanced interrupt detection with faster response and gradual decay
+  // PHASE 3: Enhanced interrupt detection with faster response and exponential decay
   private async checkForInterrupt(sessionId: string, amplitude: number): Promise<void> {
     const s = this.sessions.get(sessionId);
     if (!s || !s.isPlayingBack) return;
 
     const currentTime = Date.now();
-    const playbackBufferMs = this.ENHANCED_INTERRUPT_CONFIG.playbackBufferMs; // PHASE 3: Reduced to 100ms (was 500ms)
-    const interruptCooldownMs = this.ENHANCED_INTERRUPT_CONFIG.interruptCooldownMs; // PHASE 3: Reduced to 800ms (was 1000ms)
+    const { playbackBufferMs, interruptCooldownMs, exponentialDecayFactor } = this.ENHANCED_INTERRUPT_CONFIG;
 
-    // PHASE 3: Reduced initial buffer delay for faster interrupt detection
-    if (currentTime - s.playbackStartTime < playbackBufferMs) {
-      return; // Too early, ignore
-    }
+    // Timing constraints
+    if (currentTime - s.playbackStartTime < playbackBufferMs) return;
+    if (currentTime - s.lastInterruptTime < interruptCooldownMs) return;
 
-    // Check cooldown period
-    if (currentTime - s.lastInterruptTime < interruptCooldownMs) {
-      return; // In cooldown, ignore
-    }
-
-    // PHASE 3: Enhanced interrupt detection with gradual decay
+    // Enhanced interrupt detection with exponential decay
     if (amplitude > s.interruptThreshold) {
       s.consecutiveInterruptChunks++;
 
-      // PHASE 3: Faster detection - only 2 chunks needed (was 3)
       if (s.consecutiveInterruptChunks >= s.interruptChunkCount) {
-        // Instant interrupt detected!
         await this.handleInstantInterrupt(sessionId);
       }
     } else {
-      // PHASE 3: Gradual decay instead of immediate reset
-      // This prevents false negatives from brief audio dips
-      s.consecutiveInterruptChunks = Math.max(0, s.consecutiveInterruptChunks - 0.5);
+      // Exponential decay instead of linear
+      s.consecutiveInterruptChunks *= exponentialDecayFactor;
+      if (s.consecutiveInterruptChunks < 0.1) {
+        s.consecutiveInterruptChunks = 0;
+      }
     }
   }
 
@@ -328,41 +391,40 @@ export class VoiceOrchestratorService {
     const s = this.sessions.get(sessionId);
     if (!s) return;
 
-    this.logger.log(`🚨 INSTANT INTERRUPT DETECTED for session ${sessionId}! User started speaking during playback.`);
+    this.logger.log(`🚨 INSTANT INTERRUPT DETECTED for session ${sessionId}`);
 
-    // Stop current playback first
-    await this.stopPlayback(sessionId);
-
-    // Clear ALL buffers accumulated during playback (they may contain echo/mixed audio)
-    // We'll start fresh with the interrupt audio
-    this.logger.log(`🧹 Clearing ${s.buffers.length} buffers accumulated during playback to prevent audio mixing`);
-    s.buffers = [];
-
-    // Reset interrupt counters
-    s.consecutiveInterruptChunks = 0;
-    s.lastInterruptTime = Date.now();
+    // Atomic state change
     s.playbackInterrupted = true;
     s.isPlayingBack = false;
+    s.lastInterruptTime = Date.now();
 
-    // Reset silence detection for fresh interrupt processing
+    // Stop playback and preserve interrupted buffers for debugging
+    const interruptedBuffers = [...s.buffers];
+    await this.stopPlayback(sessionId);
+
+    s.buffers = [];
+    s.consecutiveInterruptChunks = 0;
     s.silenceChunkCount = 0;
     s.activeChunkCount = 0;
+    this.logger.log(`🧹 Cleared ${interruptedBuffers.length} buffers from interrupted playback`);
 
-    // PHASE 3: Reduced delay for faster interrupt processing (was 300ms)
-    // Wait a brief moment for TTS cancellation and to accumulate fresh interrupt audio
-    this.logger.log(`🔄 Processing interrupt audio for session ${sessionId}...`);
+    // Wait for fresh audio accumulation
+    await this.delay(200);
 
-    // Small delay to ensure TTS sending is stopped and fresh interrupt audio is accumulated
-    setTimeout(async () => {
-      // Finalize the interrupt utterance (this will process the user's fresh interrupt speech)
-      if (s.buffers.length > 0) {
-        await this.finalizeUtterance(sessionId).catch((e) => {
-          this.logger.error(`❌ Error processing interrupt utterance: ${e.message}`);
-        });
-      } else {
-        this.logger.warn(`⚠️ No interrupt audio buffers to process for session ${sessionId}`);
-      }
-    }, 200); // PHASE 3: Reduced to 200ms (was 300ms) for faster interrupt processing
+    // Critical: Re-validate session after delay
+    const currentSession = this.sessions.get(sessionId);
+    if (!currentSession) {
+      this.logger.warn(`Session ${sessionId} ended during interrupt processing`);
+      return;
+    }
+
+    // Process fresh interrupt audio
+    if (currentSession.buffers.length > 0) {
+      this.logger.log(`🔄 Processing ${currentSession.buffers.length} interrupt audio buffers`);
+      await this.finalizeUtterance(sessionId).catch((e) => {
+        this.logger.error(`❌ Error processing interrupt utterance: ${e.message}`);
+      });
+    }
   }
 
   // Stop current playback

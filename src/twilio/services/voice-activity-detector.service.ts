@@ -35,7 +35,7 @@ export class VoiceActivityDetectorService {
       const amplitude = this.calculateAmplitude(audioBuffer, format);
 
       // Determine if this is speech
-      const isSpeech = speechProbability > this.SPEECH_THRESHOLD;
+      const isSpeech = speechProbability > this.SPEECH_THRESHOLD && amplitude > 300;
 
       // Check if speech has ended (high confidence of silence after speech)
       const shouldFinalize = this.checkSpeechEnd(features, speechProbability, amplitude);
@@ -109,7 +109,7 @@ export class VoiceActivityDetectorService {
    */
   private muLawDecode(muLaw: number): number {
     const muLawValue = muLaw ^ 0xff; // Invert all bits
-    const sign = (muLawValue & 0x80) ? -1 : 1;
+    const sign = muLawValue & 0x80 ? -1 : 1;
     const exponent = (muLawValue & 0x70) >> 4;
     const mantissa = muLawValue & 0x0f;
     let pcm = mantissa * 2 + 33;
@@ -209,11 +209,7 @@ export class VoiceActivityDetectorService {
   /**
    * Check if speech has ended (high confidence of silence after speech)
    */
-  private checkSpeechEnd(
-    features: AudioFeatures,
-    speechProbability: number,
-    amplitude: number,
-  ): boolean {
+  private checkSpeechEnd(features: AudioFeatures, speechProbability: number, amplitude: number): boolean {
     // Speech has ended if:
     // 1. Low speech probability (confidence of silence)
     // 2. Low energy
@@ -253,4 +249,3 @@ export class VoiceActivityDetectorService {
     return count > 0 ? sum / count : 0;
   }
 }
-
