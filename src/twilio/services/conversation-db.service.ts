@@ -1,6 +1,7 @@
 import { Injectable, Logger, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
+import { Types } from 'mongoose';
 
 // ============================================
 // DTOs for Conversation Database Operations
@@ -318,8 +319,11 @@ export class ConversationDbService {
     page: number = 1,
     limit: number = 50,
     includeCosts: boolean = false,
+    assistantId?: string,
   ): Promise<{ conversations: ConversationEntity[]; total: number }> {
-    this.logger.log(`🚀 [CONVERSATION DB] Getting ${type} conversations for organization: ${organizationId} (includeCosts: ${includeCosts})`);
+    this.logger.log(
+      `🚀 [CONVERSATION DB] Getting ${type} conversations for organization: ${organizationId} (includeCosts: ${includeCosts}, assistantId: ${assistantId || 'none'})`,
+    );
 
     try {
       const response = await firstValueFrom(
@@ -329,6 +333,7 @@ export class ConversationDbService {
           page,
           limit,
           includeCosts, // Pass flag to use aggregation with costs
+          assistantId, // Pass assistantId filter if provided
         }),
       );
 

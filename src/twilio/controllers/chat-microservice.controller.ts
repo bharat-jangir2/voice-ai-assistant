@@ -82,13 +82,19 @@ export class ChatMicroserviceController {
         return this.errorResponse('organizationId is required', 'ORGANIZATION_ID_REQUIRED');
       }
 
-      // If a specific chat is requested
+      // If a specific chat is requested (chatId filter by _id)
       if (chatId) {
         const conv = await this.conversationDbService.getConversation(chatId);
-        // Only return if it's a 'chat' type conversation
         let calculatedCost = 0;
 
-        if (conv && conv.type === 'chat') {
+        // Validate: conversation exists, is 'chat' type, belongs to correct organization, and matches assistantId if provided
+        const isValidConversation =
+          conv &&
+          conv.type === 'chat' &&
+          conv.organizationId?.toString() === orgId &&
+          (!assistantId || conv.assistantId?.toString() === assistantId);
+
+        if (isValidConversation) {
           try {
             // Calculate cost from messages (more accurate than stored value)
             const costResponse: any = await firstValueFrom(
@@ -107,25 +113,24 @@ export class ChatMicroserviceController {
           }
         }
 
-        const single =
-          conv && conv.type === 'chat'
-            ? [
-                {
-                  _id: conv._id,
-                  organizationId: conv.organizationId,
-                  assistantId: conv.assistantId,
-                  userId: conv.userId,
-                  type: conv.type,
-                  direction: conv.direction,
-                  status: conv.status,
-                  stream: conv.stream,
-                  startedAt: conv.startedAt,
-                  lastActivityAt: conv.lastActivityAt,
-                  messageCount: conv?.conversationMetrics?.totalMessages ?? 0,
-                  cost: calculatedCost, // Total cost calculated from all messages (4 decimal places)
-                },
-              ]
-            : [];
+        const single = isValidConversation
+          ? [
+              {
+                _id: conv._id,
+                organizationId: conv.organizationId,
+                assistantId: conv.assistantId,
+                userId: conv.userId,
+                type: conv.type,
+                direction: conv.direction,
+                status: conv.status,
+                stream: conv.stream,
+                startedAt: conv.startedAt,
+                lastActivityAt: conv.lastActivityAt,
+                messageCount: conv?.conversationMetrics?.totalMessages ?? 0,
+                cost: calculatedCost, // Total cost calculated from all messages (4 decimal places)
+              },
+            ]
+          : [];
 
         return {
           success: true,
@@ -139,6 +144,7 @@ export class ChatMicroserviceController {
               page: 1,
               limit: single.length || limitNum,
               total: single.length,
+              totalPages: single.length > 0 ? 1 : 0,
               hasNext: false,
               hasPrev: false,
             },
@@ -147,16 +153,19 @@ export class ChatMicroserviceController {
       }
 
       // Get only 'chat' type conversations for chat logs API with costs calculated via aggregation
+      // assistantId filter is now applied at database level for better performance and correct pagination
       const { conversations, total } = await this.conversationDbService.getConversationsByType(
         orgId,
         'chat',
         pageNum,
         limitNum,
-        true,
+        true, // includeCosts
+        assistantId, // Pass assistantId to filter at database level
       );
 
       // Costs are already calculated in the aggregation pipeline, use calculatedCost field
-      let items = (conversations || []).map((c: any) => ({
+      // No need to filter by assistantId here as it's already filtered at database level
+      const items = (conversations || []).map((c: any) => ({
         _id: c._id,
         organizationId: c.organizationId,
         assistantId: c.assistantId,
@@ -171,9 +180,10 @@ export class ChatMicroserviceController {
         cost: parseFloat(Number((c?.calculatedCost ?? c?.cost) || 0).toFixed(4)), // Use calculated cost from aggregation (4 decimal places)
       }));
 
-      if (assistantId) {
-        items = items.filter((c: any) => c.assistantId?.toString() === assistantId);
-      }
+      // Calculate pagination correctly based on filtered total
+      const totalPages = Math.ceil(total / limitNum);
+      const hasNext = pageNum < totalPages;
+      const hasPrev = pageNum > 1;
 
       return {
         success: true,
@@ -187,8 +197,9 @@ export class ChatMicroserviceController {
             page: pageNum,
             limit: limitNum,
             total,
-            hasNext: offsetNum + items.length < total,
-            hasPrev: pageNum > 1,
+            totalPages,
+            hasNext,
+            hasPrev,
           },
         },
       };
